@@ -27,6 +27,8 @@ namespace IdleClicker
 
         // Properties
 
+        public float Strength => strength;
+        public float Money => money;
         public TrainingToolSO CurrentTrainingTool => currentTrainingTool;
         public float CooldownFraction => autoLiftTimer / AUTO_LIFTING_SPEED;
         public bool CanBuyingNewTrainingTool => money >= trainingTools[trainingToolForBuyingIndex].Cost;
