@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace IdleClicker
     public class GameManager : MonoBehaviour
     {
         // Variables
+
+        public static GameManager Instance;
 
         private const float AUTO_LIFTING_SPEED = 2f;
 
@@ -24,12 +27,27 @@ namespace IdleClicker
 
         // Properties
 
+        public TrainingToolSO CurrentTrainingTool => currentTrainingTool;
+        public float CooldownFraction => autoLiftTimer / AUTO_LIFTING_SPEED;
+        public bool CanBuyingNewTrainingTool => money >= trainingTools[trainingToolForBuyingIndex].Cost;
+
+        // Events
+
+        public event Action OnBuyingTrainingTool;
+        public event Action OnEquipTrainingTool;
+
 
         // Methods
 
+        private void Awake()
+        {
+            Instance = this;
+
+            EquipTrainingTool(trainingTools[0]);
+        }
+
         private void Start()
         {
-            currentTrainingTool = trainingTools[0];
             trainingToolForBuyingIndex = 1;
         }
 
@@ -40,16 +58,6 @@ namespace IdleClicker
             {
                 autoLiftTimer = AUTO_LIFTING_SPEED;
                 strength += currentTrainingTool.EarningPerLift * earningBonus;
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                ExchangeStrengthForMoney();
-            }
-
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                BuyTrainingTool();
             }
         }
 
@@ -77,12 +85,16 @@ namespace IdleClicker
             money -= trainingTools[trainingToolForBuyingIndex].Cost;
             trainingToolForBuyingIndex++;
 
+            OnBuyingTrainingTool?.Invoke();
+
             return true;
         }
 
         public void EquipTrainingTool(TrainingToolSO trainingTool)
         {
             currentTrainingTool = trainingTool;
+
+            OnEquipTrainingTool?.Invoke();
         }
     }
 }

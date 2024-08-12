@@ -7,11 +7,13 @@ namespace IdleClicker
     {
         // Variables
 
+        [SerializeField] private Sprite icon;
         [SerializeField] private float cost;
         [SerializeField] private float earningPerLift;
 
         // Properties
 
+        public Sprite Icon => icon;
         public float Cost => cost;
         public float EarningPerLift => earningPerLift;
 
