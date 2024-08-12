@@ -1663,6 +1663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 1837249297}
   buyingButton: {fileID: 872183074}
+  buyingCost: {fileID: 1926476217}
 --- !u!1 &1168313767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,7 +2032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTrainingTool: {fileID: 0}
-  lifttSpeed: 0
+  lifttSpeed: 1
   earningBonus: 1.5
   trainingTools:
   - {fileID: 11400000, guid: f50a16a5d428420488de187dbd1fa8b0, type: 2}
@@ -2247,7 +2248,7 @@ GameObject:
   - component: {fileID: 1926476218}
   - component: {fileID: 1926476217}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Buying Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

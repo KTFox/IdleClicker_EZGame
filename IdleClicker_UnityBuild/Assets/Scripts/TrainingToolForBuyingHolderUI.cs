@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ namespace IdleClicker
 
         [SerializeField] private Image icon;
         [SerializeField] private Button buyingButton;
+        [SerializeField] private TextMeshProUGUI buyingCost;
 
         private GameManager gameManager;
 
@@ -28,6 +30,16 @@ namespace IdleClicker
         private void Start()
         {
             gameManager = GameManager.Instance;
+
+            gameManager.OnBuyingTrainingTool += GameManager_OnBuyingTrainingTool;
+
+            GameManager_OnBuyingTrainingTool();
+        }
+
+        private void GameManager_OnBuyingTrainingTool()
+        {
+            icon.sprite = gameManager.TrainingToolForBuying.Icon;
+            buyingCost.text = "$" + gameManager.TrainingToolForBuying.Cost.ToString();
         }
 
         private void Update()
