@@ -37,6 +37,9 @@ namespace IdleClicker
 
         private void Update()
         {
+            upgradeEarningBonusButton.interactable = gameManager.CanUpgradeEarningBonus;
+            upgradeLiftSpeedButton.interactable = gameManager.CanUpgradeLiftSpeed;
+
             if (liftSpeed != null)
             {
                 liftSpeed.text = gameManager.LiftSpeed.ToString() + "s";

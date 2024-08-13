@@ -27,19 +27,32 @@ namespace IdleClicker
             }
         }
 
-        public void UpdateTrainingToolSlotState(TrainingToolSO trainingToolSO, int state)
+        public void UpdateTrainingToolSlotState(TrainingToolSO trainingTool, int state)
         {
             TrainingToolSlotUI[] trainingToolSlots = bagContent.GetComponentsInChildren<TrainingToolSlotUI>();
 
             if (state == 2)
             {
-                SetSelectedTool(trainingToolSO);
+                foreach (TrainingToolSlotUI trainingToolSlot in trainingToolSlots)
+                {
+                    if (trainingToolSlot.State == 2)
+                    {
+                        trainingToolSlot.ChangeState(1);
+                    }
+
+                    if (trainingToolSlot.TrainingTool == trainingTool)
+                    {
+                        trainingToolSlot.ChangeState(2);
+                    }
+                }
+
+                SetSelectedTool(trainingTool);
             }
             else
             {
                 foreach (TrainingToolSlotUI trainingToolSlot in trainingToolSlots)
                 {
-                    if (trainingToolSlot.TrainingTool == trainingToolSO)
+                    if (trainingToolSlot.TrainingTool == trainingTool)
                     {
                         trainingToolSlot.ChangeState(state);
                     }
@@ -50,19 +63,6 @@ namespace IdleClicker
         public void SetSelectedTool(TrainingToolSO trainingTool)
         {
             trainingToolInfoPanel.Setup(trainingTool);
-            TrainingToolSlotUI[] trainingToolSlots = bagContent.GetComponentsInChildren<TrainingToolSlotUI>();
-            foreach (TrainingToolSlotUI trainingToolSlot in trainingToolSlots)
-            {
-                if (trainingToolSlot.State == 2)
-                {
-                    trainingToolSlot.ChangeState(1);
-                }
-
-                if (trainingToolSlot.TrainingTool == trainingTool)
-                {
-                    trainingToolSlot.ChangeState(2);
-                }
-            }
         }
     }
 }

@@ -52,6 +52,8 @@ namespace IdleClicker
         public TrainingToolSO TrainingToolForBuying => trainingTools[trainingToolForBuyingIndex];
         public float AutoLiftCooldownFraction => autoLiftTimer / AUTO_LIFTING_SPEED;
         public bool CanBuyingNewTrainingTool => money >= trainingTools[trainingToolForBuyingIndex].Cost;
+        public bool CanUpgradeLiftSpeed => money >= LiftSpeedUpgradeCost;
+        public bool CanUpgradeEarningBonus => money >= EarningBonusUpgradeCost;
 
 
         // Methods
