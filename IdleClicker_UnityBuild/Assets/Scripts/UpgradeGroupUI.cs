@@ -42,12 +42,12 @@ namespace IdleClicker
 
             if (liftSpeed != null)
             {
-                liftSpeed.text = gameManager.LiftSpeed.ToString() + "s";
+                liftSpeed.text = gameManager.LiftSpeed.ToString("F1") + "s";
             }
 
             if (liftSpeedUpgradeCost != null)
             {
-                liftSpeedUpgradeCost.text = "$" + gameManager.LiftSpeedUpgradeCost.ToString();
+                liftSpeedUpgradeCost.text = "$" + gameManager.LiftSpeedUpgradeCost.ToString("F1");
             }
 
             if (earningBonus != null)
@@ -57,7 +57,7 @@ namespace IdleClicker
 
             if (earningBonusUpgradeCost != null)
             {
-                earningBonusUpgradeCost.text = "$" + gameManager.EarningBonusUpgradeCost.ToString();
+                earningBonusUpgradeCost.text = "$" + gameManager.EarningBonusUpgradeCost.ToString("F1");
             }
         }
     }

@@ -24,8 +24,8 @@ namespace IdleClicker
 
         private void Update()
         {
-            strengthValue.text = gameManager.Strength.ToString();
-            moneyValue.text = gameManager.Money.ToString();
+            strengthValue.text = ((int)gameManager.Strength).ToString();
+            moneyValue.text = ((int)gameManager.Money).ToString();
         }
     }
 }

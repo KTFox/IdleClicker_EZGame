@@ -14,15 +14,16 @@ namespace IdleClicker
         private const float MIN_LIFTING_SPEED = 0.1f;
         private const float DECREASING_LIFT_SPEED_PER_LEVEL = 0.1f;
         private const float INCREASING_EARNING_BONUS_PER_LEVEL = 0.2f;
+        private const float UPGRADE_COST_MULTIPLIER = 2f;
 
         [SerializeField] private List<TrainingToolSO> trainingTools = new List<TrainingToolSO>();
 
         [Header("Training info")]
         [SerializeField] private TrainingToolSO currentTrainingTool;
         [SerializeField] private float liftSpeed = 1f;
-        [SerializeField] private float[] liftSpeedUpgradeCosts;
+        [SerializeField] private float liftSpeedUpgradeCost = 10f;
         [SerializeField][Min(1f)] private float earningBonus = 1.0f;
-        [SerializeField] private float[] earningBonusUpgradeCosts;
+        [SerializeField] private float earningBonusUpgradeCost = 10f;
 
         [Header("Asset info")]
         [SerializeField] private float strength;
@@ -34,8 +35,6 @@ namespace IdleClicker
         [SerializeField] private BagGroupUI bagGroupUI;
 
         private int trainingToolForBuyingIndex;
-        private int currentLiftSpeedLevel;
-        private int currentEarningBonusLevel;
         private float autoLiftTimer;
         private float liftTimer;
 
@@ -44,9 +43,9 @@ namespace IdleClicker
         public List<TrainingToolSO> TrainingTools => trainingTools;
         public TrainingToolSO CurrentTrainingTool => currentTrainingTool;
         public float LiftSpeed => liftSpeed;
-        public float LiftSpeedUpgradeCost => liftSpeedUpgradeCosts[currentLiftSpeedLevel + 1];
+        public float LiftSpeedUpgradeCost => liftSpeedUpgradeCost;
         public float EarningBonus => earningBonus;
-        public float EarningBonusUpgradeCost => earningBonusUpgradeCosts[currentEarningBonusLevel + 1];
+        public float EarningBonusUpgradeCost => earningBonusUpgradeCost;
         public float Strength => strength;
         public float Money => money;
         public TrainingToolSO TrainingToolForBuying => trainingTools[trainingToolForBuyingIndex];
@@ -124,7 +123,15 @@ namespace IdleClicker
             EquipTrainingTool(trainingTools[trainingToolForBuyingIndex]);
 
             trainingToolForBuyingIndex++;
-            trainingToolForBuyingHolderUI.UpdateHolderInfo(trainingTools[trainingToolForBuyingIndex]);
+
+            if (trainingToolForBuyingIndex >= trainingTools.Count)
+            {
+                trainingToolForBuyingHolderUI.gameObject.SetActive(false);
+            }
+            else
+            {
+                trainingToolForBuyingHolderUI.UpdateHolderInfo(trainingTools[trainingToolForBuyingIndex]);
+            }
         }
 
         public void EquipTrainingTool(TrainingToolSO trainingTool)
@@ -142,7 +149,7 @@ namespace IdleClicker
 
         public void UpgradeLiftSpeed()
         {
-            if (money < liftSpeedUpgradeCosts[currentLiftSpeedLevel + 1])
+            if (money < liftSpeedUpgradeCost)
             {
                 return;
             }
@@ -152,20 +159,20 @@ namespace IdleClicker
                 return;
             }
 
-            money -= liftSpeedUpgradeCosts[currentLiftSpeedLevel + 1];
-            currentLiftSpeedLevel++;
+            money -= liftSpeedUpgradeCost;
+            liftSpeedUpgradeCost *= UPGRADE_COST_MULTIPLIER;
             liftSpeed -= DECREASING_LIFT_SPEED_PER_LEVEL;
         }
 
         public void UpgradeEarningBonus()
         {
-            if (money < earningBonusUpgradeCosts[currentEarningBonusLevel + 1])
+            if (money < earningBonusUpgradeCost)
             {
                 return;
             }
 
-            money -= earningBonusUpgradeCosts[currentEarningBonusLevel + 1];
-            currentEarningBonusLevel++;
+            money -= earningBonusUpgradeCost;
+            earningBonusUpgradeCost *= UPGRADE_COST_MULTIPLIER;
             earningBonus += INCREASING_EARNING_BONUS_PER_LEVEL;
         }
     }
