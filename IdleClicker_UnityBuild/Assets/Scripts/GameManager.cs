@@ -34,6 +34,10 @@ namespace IdleClicker
         [SerializeField] private TrainingToolForBuyingHolderUI trainingToolForBuyingHolderUI;
         [SerializeField] private BagGroupUI bagGroupUI;
 
+        [Header("Character animator")]
+        [SerializeField] private Animator characterAnimator;
+        [SerializeField] private SpriteRenderer toolSprite;
+
         private int trainingToolForBuyingIndex;
         private float autoLiftTimer;
         private float liftTimer;
@@ -80,6 +84,7 @@ namespace IdleClicker
             {
                 autoLiftTimer = AUTO_LIFTING_SPEED;
                 strength += currentTrainingTool.EarningPerLift * earningBonus;
+                characterAnimator.SetTrigger("Act");
             }
         }
 
@@ -98,6 +103,7 @@ namespace IdleClicker
                         liftTimer = liftSpeed;
                         autoLiftTimer = AUTO_LIFTING_SPEED;
                         strength += currentTrainingTool.EarningPerLift * earningBonus;
+                        characterAnimator.SetTrigger("Act");
                     }
                 }
             }
@@ -137,6 +143,7 @@ namespace IdleClicker
         public void EquipTrainingTool(TrainingToolSO trainingTool)
         {
             currentTrainingTool = trainingTool;
+            toolSprite.sprite = trainingTool.ToolVisual;
             trainingToolHolderUI.UpdateIcon(trainingTool);
             bagGroupUI.UpdateTrainingToolSlotState(trainingTool, 2);
         }

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 083833f4146cf624185f4c07c6eb4222, type: 3}
-  m_Name: TrainingTool_1
+  m_Name: Weight stack level 1
   m_EditorClassIdentifier: 
-  toolName: Tool_1
-  icon: {fileID: -162614621, guid: 440e508311940e6438f1aa6a3f284f33, type: 3}
-  cost: 0
-  earningPerLift: 10
+  toolName: Weight stack level 1
+  icon: {fileID: -320236487, guid: 71713f85cb693424897af3d03d1232ff, type: 3}
+  toolVisual: {fileID: -320236487, guid: 71713f85cb693424897af3d03d1232ff, type: 3}
+  cost: 200
+  earningPerLift: 50

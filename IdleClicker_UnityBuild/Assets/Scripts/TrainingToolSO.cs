@@ -9,6 +9,7 @@ namespace IdleClicker
 
         [SerializeField] private string toolName;
         [SerializeField] private Sprite icon;
+        [SerializeField] private Sprite toolVisual;
         [SerializeField] private float cost;
         [SerializeField] private float earningPerLift;
 
@@ -16,6 +17,7 @@ namespace IdleClicker
 
         public string ToolName => toolName;
         public Sprite Icon => icon;
+        public Sprite ToolVisual => toolVisual;
         public float Cost => cost;
         public float EarningPerLift => earningPerLift;
 

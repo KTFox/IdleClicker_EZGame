@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 083833f4146cf624185f4c07c6eb4222, type: 3}
-  m_Name: TrainingTool_4
+  m_Name: Kettlebell
   m_EditorClassIdentifier: 
-  toolName: Tool_4
-  icon: {fileID: 531583838, guid: 440e508311940e6438f1aa6a3f284f33, type: 3}
-  cost: 200
-  earningPerLift: 40
+  toolName: Kettlebell
+  icon: {fileID: 1727665633, guid: 3d076634cd0c8bf4da6487a1a30af615, type: 3}
+  toolVisual: {fileID: 1727665633, guid: 3d076634cd0c8bf4da6487a1a30af615, type: 3}
+  cost: 50
+  earningPerLift: 20

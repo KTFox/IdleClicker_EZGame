@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 083833f4146cf624185f4c07c6eb4222, type: 3}
-  m_Name: TrainingTool_3
+  m_Name: Exercise ball
   m_EditorClassIdentifier: 
-  toolName: Tool_3
-  icon: {fileID: -1121554296, guid: 440e508311940e6438f1aa6a3f284f33, type: 3}
-  cost: 100
-  earningPerLift: 30
+  toolName: Exercise ball
+  icon: {fileID: 40219148, guid: 51783f47059df6c41b342f0b66caaebd, type: 3}
+  toolVisual: {fileID: 40219148, guid: 51783f47059df6c41b342f0b66caaebd, type: 3}
+  cost: 0
+  earningPerLift: 10
