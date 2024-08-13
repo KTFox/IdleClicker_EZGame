@@ -12,11 +12,16 @@ namespace IdleClicker
         public static GameManager Instance;
 
         private const float AUTO_LIFTING_SPEED = 2f;
+        private const float MIN_LIFTING_SPEED = 0.1f;
+        private const float DECREASING_LIFT_SPEED_PER_LEVEL = 0.1f;
+        private const float INCREASING_EARNING_BONUS_PER_LEVEL = 0.2f;
 
         [Header("Training info")]
         [SerializeField] private TrainingToolSO currentTrainingTool;
-        [SerializeField] private float lifttSpeed = 1f;
-        [SerializeField][Min(1f)] private float earningBonus = 1.5f;
+        [SerializeField] private float liftSpeed = 1f;
+        [SerializeField] private float[] liftSpeedUpgradeCosts;
+        [SerializeField][Min(1f)] private float earningBonus = 1.0f;
+        [SerializeField] private float[] earningBonusUpgradeCosts;
         [SerializeField] private List<TrainingToolSO> trainingTools = new List<TrainingToolSO>();
 
         [Header("Asset info")]
@@ -24,6 +29,8 @@ namespace IdleClicker
         [SerializeField] private float money;
 
         private int trainingToolForBuyingIndex;
+        private int currentLiftSpeedLevel;
+        private int currentEarningBonusLevel;
         private float autoLiftTimer;
         private float liftTimer;
 
@@ -33,6 +40,10 @@ namespace IdleClicker
         public float Money => money;
         public TrainingToolSO CurrentTrainingTool => currentTrainingTool;
         public TrainingToolSO TrainingToolForBuying => trainingTools[trainingToolForBuyingIndex];
+        public float LiftSpeed => liftSpeed;
+        public float LiftSpeedUpgradeCost => liftSpeedUpgradeCosts[currentLiftSpeedLevel + 1];
+        public float EarningBonus => earningBonus;
+        public float EarningBonusUpgradeCost => earningBonusUpgradeCosts[currentEarningBonusLevel + 1];
         public float CooldownFraction => autoLiftTimer / AUTO_LIFTING_SPEED;
         public bool CanBuyingNewTrainingTool => money >= trainingTools[trainingToolForBuyingIndex].Cost;
 
@@ -70,11 +81,21 @@ namespace IdleClicker
                 {
                     if (liftTimer <= 0)
                     {
-                        liftTimer = lifttSpeed;
+                        liftTimer = liftSpeed;
                         autoLiftTimer = AUTO_LIFTING_SPEED;
                         strength += currentTrainingTool.EarningPerLift * earningBonus;
                     }
                 }
+            }
+
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                UpgradeLiftSpeed();
+            }
+
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                UpgradeEarningBonus();
             }
         }
 
@@ -112,6 +133,39 @@ namespace IdleClicker
             currentTrainingTool = trainingTool;
 
             OnEquipTrainingTool?.Invoke();
+        }
+
+        public bool UpgradeLiftSpeed()
+        {
+            if (money < liftSpeedUpgradeCosts[currentLiftSpeedLevel + 1])
+            {
+                return false;
+            }
+
+            if (liftSpeed <= MIN_LIFTING_SPEED)
+            {
+                return false;
+            }
+
+            money -= liftSpeedUpgradeCosts[currentLiftSpeedLevel + 1];
+            currentLiftSpeedLevel++;
+            liftSpeed -= DECREASING_LIFT_SPEED_PER_LEVEL;
+
+            return true;
+        }
+
+        public bool UpgradeEarningBonus()
+        {
+            if (money < earningBonusUpgradeCosts[currentEarningBonusLevel + 1])
+            {
+                return false;
+            }
+
+            money -= earningBonusUpgradeCosts[currentEarningBonusLevel + 1];
+            currentEarningBonusLevel++;
+            earningBonus += INCREASING_EARNING_BONUS_PER_LEVEL;
+
+            return true;
         }
     }
 }
