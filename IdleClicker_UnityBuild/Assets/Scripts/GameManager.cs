@@ -16,17 +16,22 @@ namespace IdleClicker
         private const float DECREASING_LIFT_SPEED_PER_LEVEL = 0.1f;
         private const float INCREASING_EARNING_BONUS_PER_LEVEL = 0.2f;
 
+        [SerializeField] private List<TrainingToolSO> trainingTools = new List<TrainingToolSO>();
+
         [Header("Training info")]
         [SerializeField] private TrainingToolSO currentTrainingTool;
         [SerializeField] private float liftSpeed = 1f;
         [SerializeField] private float[] liftSpeedUpgradeCosts;
         [SerializeField][Min(1f)] private float earningBonus = 1.0f;
         [SerializeField] private float[] earningBonusUpgradeCosts;
-        [SerializeField] private List<TrainingToolSO> trainingTools = new List<TrainingToolSO>();
 
         [Header("Asset info")]
         [SerializeField] private float strength;
         [SerializeField] private float money;
+
+        [Header("UI")]
+        [SerializeField] private TrainingToolHolderUI trainingToolHolderUI;
+        [SerializeField] private TrainingToolForBuyingHolderUI trainingToolForBuyingHolderUI;
 
         private int trainingToolForBuyingIndex;
         private int currentLiftSpeedLevel;
@@ -36,21 +41,22 @@ namespace IdleClicker
 
         // Properties
 
-        public float Strength => strength;
-        public float Money => money;
+        public List<TrainingToolSO> TrainingTools => trainingTools;
         public TrainingToolSO CurrentTrainingTool => currentTrainingTool;
-        public TrainingToolSO TrainingToolForBuying => trainingTools[trainingToolForBuyingIndex];
         public float LiftSpeed => liftSpeed;
         public float LiftSpeedUpgradeCost => liftSpeedUpgradeCosts[currentLiftSpeedLevel + 1];
         public float EarningBonus => earningBonus;
         public float EarningBonusUpgradeCost => earningBonusUpgradeCosts[currentEarningBonusLevel + 1];
-        public float CooldownFraction => autoLiftTimer / AUTO_LIFTING_SPEED;
+        public float Strength => strength;
+        public float Money => money;
+        public TrainingToolSO TrainingToolForBuying => trainingTools[trainingToolForBuyingIndex];
+        public float AutoLiftCooldownFraction => autoLiftTimer / AUTO_LIFTING_SPEED;
         public bool CanBuyingNewTrainingTool => money >= trainingTools[trainingToolForBuyingIndex].Cost;
 
         // Events
 
-        public event Action OnBuyingTrainingTool;
-        public event Action OnEquipTrainingTool;
+        public event Action<TrainingToolSO> OnBuyingTrainingTool;
+        public event Action<TrainingToolSO> OnEquipTrainingTool;
 
 
         // Methods
@@ -58,20 +64,32 @@ namespace IdleClicker
         private void Awake()
         {
             Instance = this;
+        }
 
+        private void Start()
+        {
             BuyTrainingTool();
         }
 
         private void Update()
         {
-            autoLiftTimer -= Time.deltaTime;
-            liftTimer -= Time.deltaTime;
+            HandleAutoLift();
+            HandleManualLift();
+        }
 
+        private void HandleAutoLift()
+        {
+            autoLiftTimer -= Time.deltaTime;
             if (autoLiftTimer <= 0)
             {
                 autoLiftTimer = AUTO_LIFTING_SPEED;
                 strength += currentTrainingTool.EarningPerLift * earningBonus;
             }
+        }
+
+        private void HandleManualLift()
+        {
+            liftTimer -= Time.deltaTime;
 
             if (Input.touchCount > 0)
             {
@@ -87,16 +105,33 @@ namespace IdleClicker
                     }
                 }
             }
+        }
 
-            if (Input.GetKeyDown(KeyCode.U))
+        public void BuyTrainingTool()
+        {
+            if (trainingToolForBuyingIndex > trainingTools.Count - 1)
             {
-                UpgradeLiftSpeed();
+                Debug.Log("Reached maximum of training tool");
+                return;
             }
 
-            if (Input.GetKeyDown(KeyCode.V))
+            if (money < trainingTools[trainingToolForBuyingIndex].Cost)
             {
-                UpgradeEarningBonus();
+                Debug.Log("Don't have enough money!!!");
+                return;
             }
+
+            EquipTrainingTool(trainingTools[trainingToolForBuyingIndex]);
+
+            money -= trainingTools[trainingToolForBuyingIndex].Cost;
+            trainingToolForBuyingIndex++;
+            trainingToolForBuyingHolderUI.UpdateHolderInfo(trainingTools[trainingToolForBuyingIndex]);
+        }
+
+        public void EquipTrainingTool(TrainingToolSO trainingTool)
+        {
+            currentTrainingTool = trainingTool;
+            trainingToolHolderUI.UpdateIcon(trainingTool);
         }
 
         public void ExchangeStrengthForMoney()
@@ -105,67 +140,33 @@ namespace IdleClicker
             strength = 0f;
         }
 
-        public bool BuyTrainingTool()
-        {
-            if (trainingToolForBuyingIndex > trainingTools.Count - 1)
-            {
-                Debug.Log("Reached maximum of training tool");
-                return false;
-            }
-
-            if (money < trainingTools[trainingToolForBuyingIndex].Cost)
-            {
-                Debug.Log("Don't have enough money!!!");
-                return false;
-            }
-
-            EquipTrainingTool(trainingTools[trainingToolForBuyingIndex]);
-            money -= trainingTools[trainingToolForBuyingIndex].Cost;
-            trainingToolForBuyingIndex++;
-
-            OnBuyingTrainingTool?.Invoke();
-
-            return true;
-        }
-
-        public void EquipTrainingTool(TrainingToolSO trainingTool)
-        {
-            currentTrainingTool = trainingTool;
-
-            OnEquipTrainingTool?.Invoke();
-        }
-
-        public bool UpgradeLiftSpeed()
+        public void UpgradeLiftSpeed()
         {
             if (money < liftSpeedUpgradeCosts[currentLiftSpeedLevel + 1])
             {
-                return false;
+                return;
             }
 
             if (liftSpeed <= MIN_LIFTING_SPEED)
             {
-                return false;
+                return;
             }
 
             money -= liftSpeedUpgradeCosts[currentLiftSpeedLevel + 1];
             currentLiftSpeedLevel++;
             liftSpeed -= DECREASING_LIFT_SPEED_PER_LEVEL;
-
-            return true;
         }
 
-        public bool UpgradeEarningBonus()
+        public void UpgradeEarningBonus()
         {
             if (money < earningBonusUpgradeCosts[currentEarningBonusLevel + 1])
             {
-                return false;
+                return;
             }
 
             money -= earningBonusUpgradeCosts[currentEarningBonusLevel + 1];
             currentEarningBonusLevel++;
             earningBonus += INCREASING_EARNING_BONUS_PER_LEVEL;
-
-            return true;
         }
     }
 }

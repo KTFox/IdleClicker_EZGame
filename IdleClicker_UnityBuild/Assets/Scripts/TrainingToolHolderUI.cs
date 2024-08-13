@@ -7,12 +7,10 @@ namespace IdleClicker
     {
         // Variables
 
-        [SerializeField] private Image Icon;
+        [SerializeField] private Image icon;
         [SerializeField] private Image cooldownBackground;
 
         private GameManager gameManager;
-
-        // Properties
 
 
         // Methods
@@ -20,20 +18,16 @@ namespace IdleClicker
         private void Start()
         {
             gameManager = GameManager.Instance;
-
-            gameManager.OnEquipTrainingTool += GameManager_OnEquipTrainingTool;
-
-            GameManager_OnEquipTrainingTool();
-        }
-
-        private void GameManager_OnEquipTrainingTool()
-        {
-            Icon.sprite = gameManager.CurrentTrainingTool.Icon;
         }
 
         private void Update()
         {
-            cooldownBackground.fillAmount = gameManager.CooldownFraction;
+            cooldownBackground.fillAmount = gameManager.AutoLiftCooldownFraction;
+        }
+
+        public void UpdateIcon(TrainingToolSO trainingTool)
+        {
+            icon.sprite = trainingTool.Icon;
         }
     }
 }

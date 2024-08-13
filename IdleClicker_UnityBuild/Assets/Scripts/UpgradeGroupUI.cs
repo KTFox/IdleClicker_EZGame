@@ -8,7 +8,6 @@ namespace IdleClicker
     {
         // Variables
 
-        [SerializeField] private GameObject upgradeTab;
         [SerializeField] private TextMeshProUGUI liftSpeed;
         [SerializeField] private TextMeshProUGUI liftSpeedUpgradeCost;
         [SerializeField] private TextMeshProUGUI earningBonus;
@@ -34,8 +33,6 @@ namespace IdleClicker
             {
                 gameManager.UpgradeLiftSpeed();
             });
-
-            upgradeTab.SetActive(false);
         }
 
         private void Update()
@@ -59,11 +56,6 @@ namespace IdleClicker
             {
                 earningBonusUpgradeCost.text = "$" + gameManager.EarningBonusUpgradeCost.ToString();
             }
-        }
-
-        public void ToggeUpgradeTab()
-        {
-            upgradeTab.SetActive(!upgradeTab.activeSelf);
         }
     }
 }

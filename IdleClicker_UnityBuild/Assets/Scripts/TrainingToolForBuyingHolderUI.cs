@@ -30,21 +30,17 @@ namespace IdleClicker
         private void Start()
         {
             gameManager = GameManager.Instance;
-
-            gameManager.OnBuyingTrainingTool += GameManager_OnBuyingTrainingTool;
-
-            GameManager_OnBuyingTrainingTool();
-        }
-
-        private void GameManager_OnBuyingTrainingTool()
-        {
-            icon.sprite = gameManager.TrainingToolForBuying.Icon;
-            buyingCost.text = "$" + gameManager.TrainingToolForBuying.Cost.ToString();
         }
 
         private void Update()
         {
             buyingButton.interactable = gameManager.CanBuyingNewTrainingTool;
+        }
+
+        public void UpdateHolderInfo(TrainingToolSO trainingToolSO)
+        {
+            icon.sprite = gameManager.TrainingToolForBuying.Icon;
+            buyingCost.text = "$" + gameManager.TrainingToolForBuying.Cost.ToString();
         }
     }
 }
