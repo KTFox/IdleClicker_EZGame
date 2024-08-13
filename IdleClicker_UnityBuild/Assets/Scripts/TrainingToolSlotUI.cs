@@ -11,6 +11,7 @@ namespace IdleClicker
         [SerializeField] private Image icon;
         [SerializeField] private Image selectedIcon;
 
+        private Button button;
         private TrainingToolSO trainingTool;
         private int state;
 
@@ -21,6 +22,19 @@ namespace IdleClicker
 
 
         // Methods
+
+        private void Awake()
+        {
+            button = GetComponent<Button>();
+        }
+
+        private void Start()
+        {
+            button.onClick.AddListener(() =>
+            {
+                FindObjectOfType<BagGroupUI>().SetSelectedTool(this.trainingTool);
+            });
+        }
 
         public void Setup(TrainingToolSO trainingTool)
         {
@@ -34,7 +48,7 @@ namespace IdleClicker
         /// 1 is unSelected state,
         /// 2 is selected state.
         /// </summary>
-        /// <param name="stateIndex"></param>
+        /// <param toolName="stateIndex"></param>
         public void ChangeState(int stateIndex)
         {
             Button button = GetComponent<Button>();

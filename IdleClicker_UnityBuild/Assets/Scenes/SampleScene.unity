@@ -178,6 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bagContent: {fileID: 249680751}
   trainingToolSlotPrefab: {fileID: 54451588115566755, guid: 635021388e23398489746a291410a25a, type: 3}
+  trainingToolInfoPanel: {fileID: 1007768018}
 --- !u!1 &50877888
 GameObject:
   m_ObjectHideFlags: 0
@@ -3333,6 +3334,7 @@ GameObject:
   - component: {fileID: 1007768015}
   - component: {fileID: 1007768017}
   - component: {fileID: 1007768016}
+  - component: {fileID: 1007768018}
   m_Layer: 5
   m_Name: Training tool info panel
   m_TagString: Untagged
@@ -3401,6 +3403,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007768014}
   m_CullTransparentMesh: 1
+--- !u!114 &1007768018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007768014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0c61fa7a3e19754b96abb9da03485ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 309146547}
+  toolName: {fileID: 406706531}
+  value: {fileID: 1250285583}
 --- !u!1 &1032424701
 GameObject:
   m_ObjectHideFlags: 0

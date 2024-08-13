@@ -8,6 +8,7 @@ namespace IdleClicker
 
         [SerializeField] private GameObject bagContent;
         [SerializeField] private TrainingToolSlotUI trainingToolSlotPrefab;
+        [SerializeField] private TrainingToolInfoPanel trainingToolInfoPanel;
 
 
         // Methods
@@ -32,18 +33,7 @@ namespace IdleClicker
 
             if (state == 2)
             {
-                foreach (TrainingToolSlotUI trainingToolSlot in trainingToolSlots)
-                {
-                    if (trainingToolSlot.State == 2)
-                    {
-                        trainingToolSlot.ChangeState(1);
-                    }
-
-                    if (trainingToolSlot.TrainingTool == trainingToolSO)
-                    {
-                        trainingToolSlot.ChangeState(state);
-                    }
-                }
+                SetSelectedTool(trainingToolSO);
             }
             else
             {
@@ -53,6 +43,24 @@ namespace IdleClicker
                     {
                         trainingToolSlot.ChangeState(state);
                     }
+                }
+            }
+        }
+
+        public void SetSelectedTool(TrainingToolSO trainingTool)
+        {
+            trainingToolInfoPanel.Setup(trainingTool);
+            TrainingToolSlotUI[] trainingToolSlots = bagContent.GetComponentsInChildren<TrainingToolSlotUI>();
+            foreach (TrainingToolSlotUI trainingToolSlot in trainingToolSlots)
+            {
+                if (trainingToolSlot.State == 2)
+                {
+                    trainingToolSlot.ChangeState(1);
+                }
+
+                if (trainingToolSlot.TrainingTool == trainingTool)
+                {
+                    trainingToolSlot.ChangeState(2);
                 }
             }
         }

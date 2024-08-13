@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083833f4146cf624185f4c07c6eb4222, type: 3}
   m_Name: TrainingTool_2
   m_EditorClassIdentifier: 
+  toolName: Tool_2
   icon: {fileID: 1950451371, guid: 440e508311940e6438f1aa6a3f284f33, type: 3}
   cost: 50
   earningPerLift: 20
-  Icon: {fileID: 0}
