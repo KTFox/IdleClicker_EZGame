@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -32,6 +31,7 @@ namespace IdleClicker
         [Header("UI")]
         [SerializeField] private TrainingToolHolderUI trainingToolHolderUI;
         [SerializeField] private TrainingToolForBuyingHolderUI trainingToolForBuyingHolderUI;
+        [SerializeField] private BagGroupUI bagGroupUI;
 
         private int trainingToolForBuyingIndex;
         private int currentLiftSpeedLevel;
@@ -52,11 +52,6 @@ namespace IdleClicker
         public TrainingToolSO TrainingToolForBuying => trainingTools[trainingToolForBuyingIndex];
         public float AutoLiftCooldownFraction => autoLiftTimer / AUTO_LIFTING_SPEED;
         public bool CanBuyingNewTrainingTool => money >= trainingTools[trainingToolForBuyingIndex].Cost;
-
-        // Events
-
-        public event Action<TrainingToolSO> OnBuyingTrainingTool;
-        public event Action<TrainingToolSO> OnEquipTrainingTool;
 
 
         // Methods
@@ -121,9 +116,11 @@ namespace IdleClicker
                 return;
             }
 
-            EquipTrainingTool(trainingTools[trainingToolForBuyingIndex]);
 
             money -= trainingTools[trainingToolForBuyingIndex].Cost;
+            bagGroupUI.UpdateTrainingToolSlotState(trainingTools[trainingToolForBuyingIndex], 1);
+            EquipTrainingTool(trainingTools[trainingToolForBuyingIndex]);
+
             trainingToolForBuyingIndex++;
             trainingToolForBuyingHolderUI.UpdateHolderInfo(trainingTools[trainingToolForBuyingIndex]);
         }
@@ -132,6 +129,7 @@ namespace IdleClicker
         {
             currentTrainingTool = trainingTool;
             trainingToolHolderUI.UpdateIcon(trainingTool);
+            bagGroupUI.UpdateTrainingToolSlotState(trainingTool, 2);
         }
 
         public void ExchangeStrengthForMoney()

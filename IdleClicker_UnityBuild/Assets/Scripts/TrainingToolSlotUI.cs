@@ -12,10 +12,12 @@ namespace IdleClicker
         [SerializeField] private Image selectedIcon;
 
         private TrainingToolSO trainingTool;
+        private int state;
 
         // Properties
 
         public TrainingToolSO TrainingTool => trainingTool;
+        public int State => state;
 
 
         // Methods
@@ -62,6 +64,8 @@ namespace IdleClicker
             {
                 Debug.LogError("State index is not exist");
             }
+
+            state = stateIndex;
         }
     }
 }
