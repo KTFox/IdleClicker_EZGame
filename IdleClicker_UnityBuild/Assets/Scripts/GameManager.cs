@@ -39,8 +39,8 @@ namespace IdleClicker
         [SerializeField] private SpriteRenderer toolSprite;
 
         private int trainingToolForBuyingIndex;
+        private bool canLift = true;
         private float autoLiftTimer;
-        private float liftTimer;
 
         // Properties
 
@@ -89,18 +89,16 @@ namespace IdleClicker
 
         private void HandleManualLift()
         {
-            liftTimer -= Time.deltaTime;
-
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
 
                 if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId) && touch.phase == TouchPhase.Began)
                 {
-                    if (liftTimer <= 0)
+                    if (canLift)
                     {
-                        liftTimer = TimeInSecondOfTrainingAnimation;
                         autoLiftTimer = AUTO_LIFTING_SPEED;
+                        canLift = false;
                         trainingToolHolderUI.RunCooldown();
                         characterAnimator.GetComponent<PlayerAnimationTrigger>().AnimationTrigger(currentTrainingTool.EarningPerLift * earningBonus);
                     }
@@ -185,6 +183,11 @@ namespace IdleClicker
         public void GainStrength()
         {
             strength += currentTrainingTool.EarningPerLift * earningBonus;
+        }
+
+        public void SetCanLift(bool value)
+        {
+            canLift = value;
         }
     }
 }

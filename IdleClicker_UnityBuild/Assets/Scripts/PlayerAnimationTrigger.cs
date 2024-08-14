@@ -58,5 +58,10 @@ namespace IdleClicker
         {
             GameManager.Instance.GainStrength();
         }
+
+        public void ResetCanLift()
+        {
+            GameManager.Instance.SetCanLift(true);
+        }
     }
 }
