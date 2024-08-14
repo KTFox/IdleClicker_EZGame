@@ -9,7 +9,7 @@ namespace IdleClicker.Battle
 
         public static BattleManager Instance;
 
-        private float ORIGINAL_TIME_OF_CHARACTER_TRAINING_ANIMATION = 2f;
+        private const float MATCH_TIME = 20f;
 
         [Header("Player info")]
         [SerializeField] private float playerCurrentStrength;
@@ -24,14 +24,26 @@ namespace IdleClicker.Battle
         [SerializeField] private OpponentAnimationTrigger opponentAnimationTrigger;
 
         [Header("UI")]
-        [SerializeField] private ToolHolderUI toolHolderUI;
+        [SerializeField] private GameObject prepareTitlePanel;
 
         private bool canPlayerLift = true;
         private bool canOpponentLift = true;
 
+        private float currentTime;
+
+        private BattleState currentState = BattleState.Preparing;
+
         // Properties
 
         public float PlayerLiftSpeed => playerLiftSpeed;
+        public int CurrentTime => (int)currentTime;
+
+        // enum
+
+        private enum BattleState
+        {
+            Preparing, Fighting, Ending
+        }
 
 
         // Methods
@@ -45,20 +57,52 @@ namespace IdleClicker.Battle
         {
             playerAnimationTrigger.GetComponent<Animator>().speed = playerLiftSpeed;
             opponentAnimationTrigger.GetComponent<Animator>().speed = opponentLiftSpeed;
+
+            currentTime = MATCH_TIME;
         }
 
         private void Update()
         {
-            HandlePlayerLift();
-            HandleOpponentLift();
-        }
-
-        private void HandleOpponentLift()
-        {
-            if (canOpponentLift)
+            switch (currentState)
             {
-                canOpponentLift = false;
-                opponentAnimationTrigger.AnimationTrigger(opponentEarningperLift);
+                case BattleState.Preparing:
+
+                    prepareTitlePanel.SetActive(true);
+
+                    if (Input.touchCount > 0)
+                    {
+                        Touch touch = Input.GetTouch(0);
+
+                        if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId) && touch.phase == TouchPhase.Began)
+                        {
+                            prepareTitlePanel.SetActive(false);
+                            currentState = BattleState.Fighting;
+                        }
+                    }
+
+                    break;
+
+                case BattleState.Fighting:
+
+                    currentTime -= Time.deltaTime;
+                    HandlePlayerLift();
+                    HandleOpponentLift();
+
+                    if (currentTime <= 0f)
+                    {
+                        currentState = BattleState.Ending;
+                    }
+
+                    break;
+
+                case BattleState.Ending:
+
+                    Debug.Log("End battle!!!");
+
+                    break;
+
+                default:
+                    break;
             }
         }
 
@@ -73,10 +117,18 @@ namespace IdleClicker.Battle
                     if (canPlayerLift)
                     {
                         canPlayerLift = false;
-                        toolHolderUI.RunCooldown();
                         playerAnimationTrigger.AnimationTrigger(playerEarningPerLift);
                     }
                 }
+            }
+        }
+
+        private void HandleOpponentLift()
+        {
+            if (canOpponentLift)
+            {
+                canOpponentLift = false;
+                opponentAnimationTrigger.AnimationTrigger(opponentEarningperLift);
             }
         }
 
