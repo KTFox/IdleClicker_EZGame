@@ -7,7 +7,13 @@ namespace IdleClicker
     {
         // Variables
 
+        [SerializeField] private PopupText popupText;
+        [SerializeField] private Canvas canvas;
+        [SerializeField] private Transform spawnPopupTextPoint;
+        [SerializeField] private float spawnPopupTextCircleRadius;
+
         private Animator animator;
+        private float gainStrength;
 
         // Methods
 
@@ -16,9 +22,15 @@ namespace IdleClicker
             animator = GetComponent<Animator>();
         }
 
-        public void AnimationTrigger()
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(spawnPopupTextPoint.position, spawnPopupTextCircleRadius);
+        }
+
+        public void AnimationTrigger(float gainStrength)
         {
             StartCoroutine(AnimationTriggerCourotine());
+            this.gainStrength = gainStrength;
         }
 
         IEnumerator AnimationTriggerCourotine()
@@ -28,6 +40,23 @@ namespace IdleClicker
             yield return new WaitForSeconds(0.09f);
 
             animator.SetBool("act", false);
+        }
+
+        public void SpawnPopupText()
+        {
+            PopupText popupTextInstance = Instantiate(popupText, canvas.transform);
+            popupTextInstance.SetValue(gainStrength);
+
+            Vector2 spawnPosition = spawnPopupTextPoint.position;
+            spawnPosition.x += Random.Range(-spawnPopupTextCircleRadius, spawnPopupTextCircleRadius);
+            spawnPosition.y += Random.Range(-spawnPopupTextCircleRadius, spawnPopupTextCircleRadius);
+
+            popupText.transform.position = spawnPosition;
+        }
+
+        public void GainStrength()
+        {
+            GameManager.Instance.GainStrength();
         }
     }
 }

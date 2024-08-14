@@ -82,9 +82,8 @@ namespace IdleClicker
             if (autoLiftTimer <= 0)
             {
                 autoLiftTimer = AUTO_LIFTING_SPEED;
-                strength += currentTrainingTool.EarningPerLift * earningBonus;
                 trainingToolHolderUI.RunCooldown();
-                characterAnimator.GetComponent<PlayerAnimationTrigger>().AnimationTrigger();
+                characterAnimator.GetComponent<PlayerAnimationTrigger>().AnimationTrigger(currentTrainingTool.EarningPerLift * earningBonus);
             }
         }
 
@@ -102,9 +101,8 @@ namespace IdleClicker
                     {
                         liftTimer = TimeInSecondOfTrainingAnimation;
                         autoLiftTimer = AUTO_LIFTING_SPEED;
-                        strength += currentTrainingTool.EarningPerLift * earningBonus;
                         trainingToolHolderUI.RunCooldown();
-                        characterAnimator.GetComponent<PlayerAnimationTrigger>().AnimationTrigger();
+                        characterAnimator.GetComponent<PlayerAnimationTrigger>().AnimationTrigger(currentTrainingTool.EarningPerLift * earningBonus);
                     }
                 }
             }
@@ -182,6 +180,11 @@ namespace IdleClicker
             money -= earningBonusUpgradeCost;
             earningBonusUpgradeCost *= UPGRADE_COST_MULTIPLIER;
             earningBonus += INCREASING_EARNING_BONUS_PER_LEVEL;
+        }
+
+        public void GainStrength()
+        {
+            strength += currentTrainingTool.EarningPerLift * earningBonus;
         }
     }
 }
