@@ -1,3 +1,4 @@
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace IdleClicker
@@ -11,7 +12,7 @@ namespace IdleClicker
         [SerializeField] private Sprite avatar;
         [SerializeField] private float reward;
         [SerializeField] private TrainingToolSO trainingTool;
-        [SerializeField] private Animator animator;
+        [SerializeField] private AnimatorController animatorController;
         [SerializeField] private float animatorSpeed;
 
         // Properties
@@ -20,7 +21,7 @@ namespace IdleClicker
         public Sprite Avatar => avatar;
         public float Reward => reward;
         public TrainingToolSO TrainingTool => trainingTool;
-        public Animator Animator => animator;
+        public AnimatorController AnimatorController => animatorController;
         public float AnimatorSpeed => animatorSpeed;
 
         // Methods

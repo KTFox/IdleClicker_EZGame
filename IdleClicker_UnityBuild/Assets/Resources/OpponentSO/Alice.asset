@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa3c6c9cff4b6fb4e96c5ec807df095a, type: 3}
+  m_Name: Alice
+  m_EditorClassIdentifier: 
+  opponentName: Alice
+  avatar: {fileID: 21300000, guid: c94dda8358a31364fa2d27dea18d31a9, type: 3}
+  reward: 1000
+  trainingTool: {fileID: 11400000, guid: ea04f000e92a08c42a3b554a2b1a649b, type: 2}
+  animatorController: {fileID: 9100000, guid: f7359e098cef13d43acd6fefbf086e37, type: 2}
+  animatorSpeed: 1.2

@@ -149,6 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddbd570d20a1e0a409765763f92b497b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avatar: {fileID: 4808816052305509074}
+  opponentName: {fileID: 5936579610960858414}
+  reward: {fileID: 6584655567987735354}
 --- !u!1 &5485678560567221729
 GameObject:
   m_ObjectHideFlags: 0
