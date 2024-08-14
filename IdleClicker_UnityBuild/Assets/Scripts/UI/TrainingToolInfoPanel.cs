@@ -1,8 +1,9 @@
+using IdleClicker.Training;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace IdleClicker
+namespace IdleClicker.UI
 {
     public class TrainingToolInfoPanel : MonoBehaviour
     {
@@ -23,7 +24,7 @@ namespace IdleClicker
         {
             equipButton.onClick.AddListener(() =>
             {
-                GameManager.Instance.EquipTrainingTool(currentSelectedTool);
+                TrainingManager.Instance.EquipTrainingTool(currentSelectedTool);
             });
         }
 
@@ -34,7 +35,7 @@ namespace IdleClicker
             toolName.text = trainingTool.ToolName;
             value.text = $"Strength gain {trainingTool.EarningPerLift}";
 
-            if (GameManager.Instance.CurrentTrainingTool == trainingTool)
+            if (TrainingManager.Instance.CurrentTrainingTool == trainingTool)
             {
                 equipButton.interactable = false;
                 equipButtonText.text = "Equipped";

@@ -1,7 +1,8 @@
+using IdleClicker.Training;
 using TMPro;
 using UnityEngine;
 
-namespace IdleClicker
+namespace IdleClicker.UI
 {
     public class AssetInfoUI : MonoBehaviour
     {
@@ -10,7 +11,7 @@ namespace IdleClicker
         [SerializeField] private TextMeshProUGUI strengthValue;
         [SerializeField] private TextMeshProUGUI moneyValue;
 
-        private GameManager gameManager;
+        private TrainingManager gameManager;
 
         // Properties
 
@@ -19,7 +20,7 @@ namespace IdleClicker
 
         private void Start()
         {
-            gameManager = GameManager.Instance;
+            gameManager = TrainingManager.Instance;
         }
 
         private void Update()

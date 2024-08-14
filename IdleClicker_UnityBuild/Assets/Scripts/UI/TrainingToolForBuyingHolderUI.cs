@@ -1,8 +1,9 @@
+using IdleClicker.Training;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace IdleClicker
+namespace IdleClicker.UI
 {
     public class TrainingToolForBuyingHolderUI : MonoBehaviour
     {
@@ -12,7 +13,7 @@ namespace IdleClicker
         [SerializeField] private Button buyingButton;
         [SerializeField] private TextMeshProUGUI buyingCost;
 
-        private GameManager gameManager;
+        private TrainingManager gameManager;
 
         // Properties
 
@@ -23,13 +24,13 @@ namespace IdleClicker
         {
             buyingButton.onClick.AddListener(() =>
             {
-                GameManager.Instance.BuyTrainingTool();
+                TrainingManager.Instance.BuyTrainingTool();
             });
         }
 
         private void Start()
         {
-            gameManager = GameManager.Instance;
+            gameManager = TrainingManager.Instance;
         }
 
         private void Update()

@@ -1,9 +1,10 @@
+using IdleClicker.UI;
 using System.Collections;
 using UnityEngine;
 
-namespace IdleClicker
+namespace IdleClicker.Training
 {
-    public class PlayerAnimationTrigger : MonoBehaviour
+    public class CharacterAnimationTrigger : MonoBehaviour
     {
         // Variables
 
@@ -56,12 +57,12 @@ namespace IdleClicker
 
         public void GainStrength()
         {
-            GameManager.Instance.GainStrength();
+            TrainingManager.Instance.GainStrength();
         }
 
         public void ResetCanLift()
         {
-            GameManager.Instance.SetCanLift(true);
+            TrainingManager.Instance.SetCanLift(true);
         }
     }
 }

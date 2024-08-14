@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace IdleClicker
+namespace IdleClicker.UI
 {
     [CreateAssetMenu(menuName = "TrainingToolSO")]
     public class TrainingToolSO : ScriptableObject

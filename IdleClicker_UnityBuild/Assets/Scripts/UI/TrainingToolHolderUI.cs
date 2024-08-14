@@ -1,7 +1,8 @@
+using IdleClicker.Training;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace IdleClicker
+namespace IdleClicker.UI
 {
     public class TrainingToolHolderUI : MonoBehaviour
     {
@@ -10,7 +11,7 @@ namespace IdleClicker
         [SerializeField] private Image icon;
         [SerializeField] private Image cooldownBackground;
 
-        private GameManager gameManager;
+        private TrainingManager gameManager;
         private float timeElapsed;
         private float duration;
         private bool isRunning;
@@ -20,7 +21,7 @@ namespace IdleClicker
 
         private void Start()
         {
-            gameManager = GameManager.Instance;
+            gameManager = TrainingManager.Instance;
         }
 
         private void Update()

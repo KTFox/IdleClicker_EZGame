@@ -1,8 +1,9 @@
+using IdleClicker.Training;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace IdleClicker
+namespace IdleClicker.UI
 {
     public class UpgradeGroupUI : MonoBehaviour
     {
@@ -15,14 +16,14 @@ namespace IdleClicker
         [SerializeField] private Button upgradeLiftSpeedButton;
         [SerializeField] private Button upgradeEarningBonusButton;
 
-        private GameManager gameManager;
+        private TrainingManager gameManager;
 
 
         // Methods
 
         private void Start()
         {
-            gameManager = GameManager.Instance;
+            gameManager = TrainingManager.Instance;
 
             upgradeEarningBonusButton.onClick.AddListener(() =>
             {

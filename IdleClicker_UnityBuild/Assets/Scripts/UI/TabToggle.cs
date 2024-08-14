@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace IdleClicker
+namespace IdleClicker.UI
 {
     public class TabToggle : MonoBehaviour
     {

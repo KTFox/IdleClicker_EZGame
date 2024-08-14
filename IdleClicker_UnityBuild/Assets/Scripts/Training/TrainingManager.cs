@@ -1,14 +1,15 @@
+using IdleClicker.UI;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace IdleClicker
+namespace IdleClicker.Training
 {
-    public class GameManager : MonoBehaviour
+    public class TrainingManager : MonoBehaviour
     {
         // Variables
 
-        public static GameManager Instance;
+        public static TrainingManager Instance;
 
         private float ORIGINAL_TIME_OF_CHARACTER_TRAINING_ANIMATION = 2f;
         private const float AUTO_LIFTING_SPEED = 4f;
@@ -83,7 +84,7 @@ namespace IdleClicker
             {
                 autoLiftTimer = AUTO_LIFTING_SPEED;
                 trainingToolHolderUI.RunCooldown();
-                characterAnimator.GetComponent<PlayerAnimationTrigger>().AnimationTrigger(currentTrainingTool.EarningPerLift * earningBonus);
+                characterAnimator.GetComponent<CharacterAnimationTrigger>().AnimationTrigger(currentTrainingTool.EarningPerLift * earningBonus);
             }
         }
 
@@ -100,7 +101,7 @@ namespace IdleClicker
                         autoLiftTimer = AUTO_LIFTING_SPEED;
                         canLift = false;
                         trainingToolHolderUI.RunCooldown();
-                        characterAnimator.GetComponent<PlayerAnimationTrigger>().AnimationTrigger(currentTrainingTool.EarningPerLift * earningBonus);
+                        characterAnimator.GetComponent<CharacterAnimationTrigger>().AnimationTrigger(currentTrainingTool.EarningPerLift * earningBonus);
                     }
                 }
             }

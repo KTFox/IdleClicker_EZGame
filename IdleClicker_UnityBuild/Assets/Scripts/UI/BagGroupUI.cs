@@ -1,6 +1,7 @@
+using IdleClicker.Training;
 using UnityEngine;
 
-namespace IdleClicker
+namespace IdleClicker.UI
 {
     public class BagGroupUI : MonoBehaviour
     {
@@ -20,7 +21,7 @@ namespace IdleClicker
                 Destroy(child.gameObject);
             }
 
-            foreach (TrainingToolSO trainingTool in FindObjectOfType<GameManager>().TrainingTools)
+            foreach (TrainingToolSO trainingTool in FindObjectOfType<TrainingManager>().TrainingTools)
             {
                 TrainingToolSlotUI trainingToolSlot = Instantiate(trainingToolSlotPrefab, bagContent.transform);
                 trainingToolSlot.Setup(trainingTool);

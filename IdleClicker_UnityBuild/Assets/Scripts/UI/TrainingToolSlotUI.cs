@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace IdleClicker
+namespace IdleClicker.UI
 {
     public class TrainingToolSlotUI : MonoBehaviour
     {
