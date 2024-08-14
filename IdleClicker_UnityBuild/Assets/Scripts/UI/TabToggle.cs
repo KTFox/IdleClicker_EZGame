@@ -8,6 +8,7 @@ namespace IdleClicker.UI
 
         [SerializeField] private GameObject upgradeTab;
         [SerializeField] private GameObject bagTab;
+        [SerializeField] private GameObject battleTab;
 
 
         // Methods
@@ -16,6 +17,7 @@ namespace IdleClicker.UI
         {
             upgradeTab.SetActive(false);
             bagTab.SetActive(false);
+            battleTab.SetActive(false);
         }
 
         public void ToggleUpgradeTab()
@@ -26,6 +28,11 @@ namespace IdleClicker.UI
         public void ToggleBagTab()
         {
             bagTab.SetActive(!bagTab.activeSelf);
+        }
+
+        public void ToggleBattleTab()
+        {
+            battleTab.SetActive(!battleTab.activeSelf);
         }
     }
 }

@@ -873,11 +873,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCurrentStrength: 0
-  playerLiftSpeed: 2
+  playerLiftSpeed: 1
   playerEarningPerLift: 10
   playerAnimationTrigger: {fileID: 4298743497147115396}
   opponentCurrentStrength: 0
-  opponentLiftSpeed: 3
+  opponentLiftSpeed: 2
   opponentEarningperLift: 20
   opponentAnimationTrigger: {fileID: 1934374860}
   toolHolderUI: {fileID: 7735167496682744845}
