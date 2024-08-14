@@ -42,7 +42,7 @@ namespace IdleClicker
 
             if (liftSpeed != null)
             {
-                liftSpeed.text = gameManager.LiftSpeed.ToString("F1") + "s";
+                liftSpeed.text = gameManager.TimeInSecondOfTrainingAnimation.ToString("F1") + "s";
             }
 
             if (liftSpeedUpgradeCost != null)

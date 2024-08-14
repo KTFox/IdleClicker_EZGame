@@ -10,7 +10,8 @@ namespace IdleClicker
 
         public static GameManager Instance;
 
-        private const float AUTO_LIFTING_SPEED = 2f;
+        private float ORIGINAL_TIME_OF_CHARACTER_TRAINING_ANIMATION = 2f;
+        private const float AUTO_LIFTING_SPEED = 4f;
         private const float MIN_LIFTING_SPEED = 0.1f;
         private const float DECREASING_LIFT_SPEED_PER_LEVEL = 0.1f;
         private const float INCREASING_EARNING_BONUS_PER_LEVEL = 0.2f;
@@ -20,7 +21,6 @@ namespace IdleClicker
 
         [Header("Training info")]
         [SerializeField] private TrainingToolSO currentTrainingTool;
-        [SerializeField] private float liftSpeed = 1f;
         [SerializeField] private float liftSpeedUpgradeCost = 10f;
         [SerializeField][Min(1f)] private float earningBonus = 1.0f;
         [SerializeField] private float earningBonusUpgradeCost = 10f;
@@ -44,16 +44,15 @@ namespace IdleClicker
 
         // Properties
 
+        public float TimeInSecondOfTrainingAnimation => ORIGINAL_TIME_OF_CHARACTER_TRAINING_ANIMATION / characterAnimator.speed;
         public List<TrainingToolSO> TrainingTools => trainingTools;
         public TrainingToolSO CurrentTrainingTool => currentTrainingTool;
-        public float LiftSpeed => liftSpeed;
         public float LiftSpeedUpgradeCost => liftSpeedUpgradeCost;
         public float EarningBonus => earningBonus;
         public float EarningBonusUpgradeCost => earningBonusUpgradeCost;
         public float Strength => strength;
         public float Money => money;
         public TrainingToolSO TrainingToolForBuying => trainingTools[trainingToolForBuyingIndex];
-        public float AutoLiftCooldownFraction => autoLiftTimer / AUTO_LIFTING_SPEED;
         public bool CanBuyingNewTrainingTool => money >= trainingTools[trainingToolForBuyingIndex].Cost;
         public bool CanUpgradeLiftSpeed => money >= LiftSpeedUpgradeCost;
         public bool CanUpgradeEarningBonus => money >= EarningBonusUpgradeCost;
@@ -84,7 +83,8 @@ namespace IdleClicker
             {
                 autoLiftTimer = AUTO_LIFTING_SPEED;
                 strength += currentTrainingTool.EarningPerLift * earningBonus;
-                characterAnimator.SetTrigger("Act");
+                trainingToolHolderUI.RunCooldown();
+                characterAnimator.GetComponent<PlayerAnimationTrigger>().AnimationTrigger();
             }
         }
 
@@ -100,10 +100,11 @@ namespace IdleClicker
                 {
                     if (liftTimer <= 0)
                     {
-                        liftTimer = liftSpeed;
+                        liftTimer = TimeInSecondOfTrainingAnimation;
                         autoLiftTimer = AUTO_LIFTING_SPEED;
                         strength += currentTrainingTool.EarningPerLift * earningBonus;
-                        characterAnimator.SetTrigger("Act");
+                        trainingToolHolderUI.RunCooldown();
+                        characterAnimator.GetComponent<PlayerAnimationTrigger>().AnimationTrigger();
                     }
                 }
             }
@@ -161,14 +162,14 @@ namespace IdleClicker
                 return;
             }
 
-            if (liftSpeed <= MIN_LIFTING_SPEED)
+            if (TimeInSecondOfTrainingAnimation <= MIN_LIFTING_SPEED)
             {
                 return;
             }
 
             money -= liftSpeedUpgradeCost;
             liftSpeedUpgradeCost *= UPGRADE_COST_MULTIPLIER;
-            liftSpeed -= DECREASING_LIFT_SPEED_PER_LEVEL;
+            characterAnimator.speed += DECREASING_LIFT_SPEED_PER_LEVEL;
         }
 
         public void UpgradeEarningBonus()

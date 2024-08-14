@@ -11,6 +11,9 @@ namespace IdleClicker
         [SerializeField] private Image cooldownBackground;
 
         private GameManager gameManager;
+        private float timeElapsed;
+        private float duration;
+        private bool isRunning;
 
 
         // Methods
@@ -22,7 +25,27 @@ namespace IdleClicker
 
         private void Update()
         {
-            cooldownBackground.fillAmount = gameManager.AutoLiftCooldownFraction;
+            duration = gameManager.TimeInSecondOfTrainingAnimation;
+
+            if (isRunning)
+            {
+                if (cooldownBackground.fillAmount < 1f)
+                {
+                    timeElapsed += Time.deltaTime;
+                    cooldownBackground.fillAmount = Mathf.Clamp01(timeElapsed / duration);
+                }
+                else
+                {
+                    cooldownBackground.fillAmount = 0f;
+                    timeElapsed = 0f;
+                    isRunning = false;
+                }
+            }
+        }
+
+        public void RunCooldown()
+        {
+            isRunning = true;
         }
 
         public void UpdateIcon(TrainingToolSO trainingTool)
