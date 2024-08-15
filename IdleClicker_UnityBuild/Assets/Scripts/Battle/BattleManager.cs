@@ -10,7 +10,7 @@ namespace IdleClicker.Battle
 
         public static BattleManager Instance;
 
-        private const float MATCH_TIME = 20f;
+        private const float MATCH_TIME = 10f;
 
         [Header("Player info")]
         [SerializeField] private float playerCurrentStrength;
