@@ -19,6 +19,7 @@ namespace IdleClicker
 
         // Structs
 
+        [System.Serializable]
         public class OpponentConfig
         {
             public OpponentSO Opponent;
@@ -40,7 +41,7 @@ namespace IdleClicker
                 Debug.LogError("Persistence data is not found");
             }
 
-            if (persistenceData.OpponentConfigs == null)
+            if (persistenceData.OpponentConfigs.Length == 0)
             {
                 opponentConfigs = new OpponentConfig[opponenets.Count];
 
@@ -64,15 +65,19 @@ namespace IdleClicker
             else
             {
                 opponentConfigs = persistenceData.OpponentConfigs;
+                OnOpponentConfigUpdate?.Invoke();
             }
         }
 
-        private void Update()
+        private void OnDestroy()
         {
-            if (Input.GetKeyDown(KeyCode.U))
+            PersistenceData persistenceData = Resources.Load<PersistenceData>("PersistenceData");
+            if (persistenceData == null)
             {
-                UnlockOpponent(opponenets[1]);
+                Debug.LogError("Persistence data is not found");
             }
+
+            persistenceData.OpponentConfigs = opponentConfigs;
         }
 
         public void UnlockOpponent(OpponentSO opponent)
