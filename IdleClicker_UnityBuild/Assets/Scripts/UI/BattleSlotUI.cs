@@ -28,20 +28,6 @@ namespace IdleClicker.UI
         {
             fightButton.onClick.AddListener(() =>
             {
-                var persistenceData = Resources.Load<PersistenceData>("PersistenceData");
-                if (persistenceData == null)
-                {
-                    Debug.LogError("Persistence data is not found");
-                    return;
-                }
-
-                TrainingToolManager trainingToolManager = FindObjectOfType<TrainingToolManager>();
-
-                persistenceData.playerAnimatorSpeed = trainingToolManager.TrainingAnimationSpeedInRealTime;
-                persistenceData.playerEarningPerLift = trainingToolManager.EarningPerLift;
-                persistenceData.playerToolVisual = trainingToolManager.CurrentTrainingTool.ToolVisual;
-                persistenceData.opponentSO = this.opponent;
-
                 SceneManager.LoadScene("Battle");
             });
         }

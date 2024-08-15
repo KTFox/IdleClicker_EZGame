@@ -59,12 +59,12 @@ namespace IdleClicker
 
         public void GainPlayerStrength()
         {
-            BattleManager.Instance.GainPlayerStrength();
+            FindObjectOfType<BattleManager>().GainPlayerStrength();
         }
 
         public void ResetCanLift()
         {
-            BattleManager.Instance.ResetCanPlayerLift();
+            FindObjectOfType<BattleManager>().ResetCanPlayerLift();
         }
     }
 }

@@ -58,12 +58,12 @@ namespace IdleClicker.Battle
 
         public void GainOpponentStrength()
         {
-            BattleManager.Instance.GainOpponentStrength();
+            FindObjectOfType<BattleManager>().GainOpponentStrength();
         }
 
         public void ResetCanLift()
         {
-            BattleManager.Instance.ResetCanOpponentLift();
+            FindObjectOfType<BattleManager>().ResetCanOpponentLift();
         }
     }
 }

@@ -34,23 +34,36 @@ namespace IdleClicker
 
         private void Awake()
         {
-            opponentConfigs = new OpponentConfig[opponenets.Count];
-
-            for (int i = 0; i < opponenets.Count; i++)
+            PersistenceData persistenceData = Resources.Load<PersistenceData>("PersistenceData");
+            if (persistenceData == null)
             {
-                OpponentConfig config = new OpponentConfig();
-                config.Opponent = opponenets[i];
+                Debug.LogError("Persistence data is not found");
+            }
 
-                if (i == 0)
-                {
-                    config.IsUnlocked = true;
-                }
-                else
-                {
-                    config.IsUnlocked = false;
-                }
+            if (persistenceData.OpponentConfigs == null)
+            {
+                opponentConfigs = new OpponentConfig[opponenets.Count];
 
-                opponentConfigs[i] = config;
+                for (int i = 0; i < opponenets.Count; i++)
+                {
+                    OpponentConfig config = new OpponentConfig();
+                    config.Opponent = opponenets[i];
+
+                    if (i == 0)
+                    {
+                        config.IsUnlocked = true;
+                    }
+                    else
+                    {
+                        config.IsUnlocked = false;
+                    }
+
+                    opponentConfigs[i] = config;
+                }
+            }
+            else
+            {
+                opponentConfigs = persistenceData.OpponentConfigs;
             }
         }
 

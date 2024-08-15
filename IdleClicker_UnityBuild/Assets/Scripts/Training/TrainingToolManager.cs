@@ -42,6 +42,7 @@ namespace IdleClicker
 
         // Structs
 
+        [System.Serializable]
         public class TrainingToolConfig
         {
             public TrainingToolSO TrainingTool;
@@ -56,24 +57,96 @@ namespace IdleClicker
 
         // Methods
 
-        private void Awake()
-        {
-            trainingToolConfigs = new TrainingToolConfig[trainingTools.Count];
-            for (int i = 0; i < trainingTools.Count; i++)
-            {
-                TrainingToolConfig trainingToolConfig = new TrainingToolConfig();
-                trainingToolConfig.TrainingTool = trainingTools[i];
-                trainingToolConfig.HasBought = false;
-
-                trainingToolConfigs[i] = trainingToolConfig;
-            }
-        }
-
         private void Start()
         {
             assetManager = FindObjectOfType<AssetManager>();
 
-            BuyTrainingTool(trainingTools[0]);
+            PersistenceData persistenceData = Resources.Load<PersistenceData>("PersistenceData");
+            if (persistenceData == null)
+            {
+                Debug.LogError("Persistence data is not found");
+            }
+
+            if (persistenceData.TrainingToolConfigs.Length == 0)
+            {
+                trainingToolConfigs = new TrainingToolConfig[trainingTools.Count];
+                for (int i = 0; i < trainingTools.Count; i++)
+                {
+                    TrainingToolConfig trainingToolConfig = new TrainingToolConfig();
+                    trainingToolConfig.TrainingTool = trainingTools[i];
+                    trainingToolConfig.HasBought = false;
+
+                    trainingToolConfigs[i] = trainingToolConfig;
+                }
+
+                Debug.Log("TrainingToolManager: instantiate new trainingToolConfigs");
+            }
+            else
+            {
+                trainingToolConfigs = persistenceData.TrainingToolConfigs;
+            }
+
+            if (persistenceData.CurrentTrainingTool == null)
+            {
+                BuyTrainingTool(trainingTools[0]);
+            }
+            else
+            {
+                EquipTrainingTool(persistenceData.CurrentTrainingTool);
+                OnTraingToolManagerUpdate?.Invoke();
+            }
+
+            if (persistenceData.LiftSpeed <= 0)
+            {
+                liftSpeed = 1;
+            }
+            else
+            {
+                liftSpeed = persistenceData.LiftSpeed;
+            }
+
+            if (persistenceData.LiftSpeedUpgradeCost <= 0)
+            {
+                liftSpeedUpgradeCost = 10f;
+            }
+            else
+            {
+                liftSpeedUpgradeCost = persistenceData.LiftSpeedUpgradeCost;
+            }
+
+            if (persistenceData.EarningBonus <= 0)
+            {
+                earningBonus = 1;
+            }
+            else
+            {
+                earningBonus = persistenceData.EarningBonus;
+            }
+
+            if (persistenceData.EarningBonusUpgradeCost <= 0)
+            {
+                earningBonusUpgradeCost = 10f;
+            }
+            else
+            {
+                earningBonusUpgradeCost = persistenceData.EarningBonusUpgradeCost;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            PersistenceData persistenceData = Resources.Load<PersistenceData>("PersistenceData");
+            if (persistenceData == null)
+            {
+                Debug.LogError("Persistence data is not found");
+            }
+
+            persistenceData.TrainingToolConfigs = trainingToolConfigs;
+            persistenceData.CurrentTrainingTool = currentTraingTool;
+            persistenceData.LiftSpeed = liftSpeed;
+            persistenceData.LiftSpeedUpgradeCost = liftSpeedUpgradeCost;
+            persistenceData.EarningBonus = earningBonus;
+            persistenceData.EarningBonusUpgradeCost = earningBonusUpgradeCost;
         }
 
         public void BuyTrainingTool(TrainingToolSO trainingTool)

@@ -17,7 +17,7 @@ namespace IdleClicker
 
         private void Start()
         {
-            battleManager = BattleManager.Instance;
+            battleManager = FindObjectOfType<BattleManager>();
         }
 
         private void Update()

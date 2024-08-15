@@ -58,20 +58,6 @@ namespace IdleClicker.Battle
         private void Awake()
         {
             Instance = this;
-
-            PersistenceData persistenceData = Resources.Load<PersistenceData>("PersistenceData");
-            if (persistenceData == null)
-            {
-                Debug.LogError("Persistence data is not found");
-            }
-
-            playerLiftAnimatorSpeed = persistenceData.playerAnimatorSpeed;
-            playerEarningPerLift = persistenceData.playerEarningPerLift;
-            playerToolSprite.sprite = persistenceData.playerToolVisual;
-            opponentLiftSpeed = persistenceData.opponentSO.AnimatorSpeed;
-            opponentEarningPerLift = persistenceData.opponentSO.TrainingTool.EarningPerLift;
-            opponentAnimator.runtimeAnimatorController = persistenceData.opponentSO.AnimatorController;
-            opponentToolSprite.sprite = persistenceData.opponentSO.TrainingTool.ToolVisual;
         }
 
         private void Start()

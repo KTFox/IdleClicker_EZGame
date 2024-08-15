@@ -17,6 +17,30 @@ namespace IdleClicker
 
         // Methods
 
+        private void Awake()
+        {
+            PersistenceData persistenceData = Resources.Load<PersistenceData>("PersistenceData");
+            if (persistenceData == null)
+            {
+                Debug.LogError("Persistence data is not found");
+            }
+
+            strength = persistenceData.Strength;
+            money = persistenceData.Money;
+        }
+
+        private void OnDestroy()
+        {
+            PersistenceData persistenceData = Resources.Load<PersistenceData>("PersistenceData");
+            if (persistenceData == null)
+            {
+                Debug.LogError("Persistence data is not found");
+            }
+
+            persistenceData.Strength = strength;
+            persistenceData.Money = money;
+        }
+
         public void ExchangeStrengthForMoney()
         {
             money += strength;
