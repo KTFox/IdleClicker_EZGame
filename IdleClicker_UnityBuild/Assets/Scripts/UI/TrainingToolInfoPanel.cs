@@ -1,4 +1,3 @@
-using IdleClicker.Training;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,9 +21,11 @@ namespace IdleClicker.UI
 
         private void Start()
         {
+            Setup(FindObjectOfType<TrainingToolManager>().CurrentTrainingTool);
+
             equipButton.onClick.AddListener(() =>
             {
-                FindObjectOfType<TrainingManager>().EquipTrainingTool(currentSelectedTool);
+                FindObjectOfType<TrainingToolManager>().EquipTrainingTool(currentSelectedTool);
             });
         }
 
@@ -35,7 +36,7 @@ namespace IdleClicker.UI
             toolName.text = trainingTool.ToolName;
             value.text = $"Strength gain {trainingTool.EarningPerLift}";
 
-            if (FindObjectOfType<TrainingManager>().CurrentTrainingTool == trainingTool)
+            if (FindObjectOfType<TrainingToolManager>().CurrentTrainingTool == trainingTool)
             {
                 equipButton.interactable = false;
                 equipButtonText.text = "Equipped";

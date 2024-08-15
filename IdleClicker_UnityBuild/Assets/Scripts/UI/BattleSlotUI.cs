@@ -1,4 +1,3 @@
-using IdleClicker.Training;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -36,11 +35,11 @@ namespace IdleClicker.UI
                     return;
                 }
 
-                TrainingManager trainingManager = FindObjectOfType<TrainingManager>();
+                TrainingToolManager trainingToolManager = FindObjectOfType<TrainingToolManager>();
 
-                persistenceData.playerAnimatorSpeed = trainingManager.AnimatorSpeed;
-                persistenceData.playerEarningPerLift = trainingManager.EarningPerLift;
-                persistenceData.playerToolVisual = trainingManager.ToolVisual;
+                persistenceData.playerAnimatorSpeed = trainingToolManager.TrainingAnimationSpeedInRealTime;
+                persistenceData.playerEarningPerLift = trainingToolManager.EarningPerLift;
+                persistenceData.playerToolVisual = trainingToolManager.CurrentTrainingTool.ToolVisual;
                 persistenceData.opponentSO = this.opponent;
 
                 SceneManager.LoadScene("Battle");

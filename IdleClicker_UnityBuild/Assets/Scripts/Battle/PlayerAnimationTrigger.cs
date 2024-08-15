@@ -48,7 +48,7 @@ namespace IdleClicker
         public void SpawnPopupText()
         {
             PopupText popupTextInstance = Instantiate(popupText, canvas.transform);
-            popupTextInstance.SetValue(gainStrength);
+            popupTextInstance.SetValue((int)gainStrength);
 
             Vector2 spawnPosition = spawnPopupTextPoint.localPosition;
             spawnPosition.x += Random.Range(-spawnPopupTextCircleRadius, spawnPopupTextCircleRadius);

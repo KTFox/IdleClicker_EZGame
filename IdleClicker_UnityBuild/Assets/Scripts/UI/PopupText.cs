@@ -28,7 +28,7 @@ namespace IdleClicker.UI
             }
         }
 
-        public void SetValue(float value)
+        public void SetValue(int value)
         {
             valueText.text = $"+{value}";
         }

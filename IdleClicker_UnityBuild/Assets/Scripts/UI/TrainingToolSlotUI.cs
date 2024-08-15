@@ -7,79 +7,73 @@ namespace IdleClicker.UI
     {
         // Variables
 
-        [SerializeField] private Image lockIcon;
-        [SerializeField] private Image icon;
-        [SerializeField] private Image selectedIcon;
+        [Header("Lock content")]
+        [SerializeField] private GameObject lockContent;
 
-        private Button button;
+        [Header("Unlock content")]
+        [SerializeField] private GameObject unlockContent;
+        [SerializeField] private Image icon;
+        [SerializeField] private GameObject selectedIcon;
+
         private TrainingToolSO trainingTool;
-        private int state;
+        private TrainingToolManager trainingToolManager;
 
         // Properties
 
         public TrainingToolSO TrainingTool => trainingTool;
-        public int State => state;
 
 
         // Methods
 
-        private void Awake()
+        private void OnEnable()
         {
-            button = GetComponent<Button>();
+            GetComponent<Button>().onClick.AddListener(() =>
+            {
+                FindObjectOfType<BagGroupUI>().SetSelectedTool(this.trainingTool);
+            });
+
         }
 
         private void Start()
         {
-            button.onClick.AddListener(() =>
+            trainingToolManager = FindObjectOfType<TrainingToolManager>();
+        }
+
+        private void Update()
+        {
+            if (this.trainingTool == trainingToolManager.CurrentTrainingTool)
             {
-                FindObjectOfType<BagGroupUI>().SetSelectedTool(this.trainingTool);
-            });
+                selectedIcon.SetActive(true);
+            }
+            else
+            {
+                selectedIcon.SetActive(false);
+            }
         }
 
         public void Setup(TrainingToolSO trainingTool)
         {
             icon.sprite = trainingTool.Icon;
             this.trainingTool = trainingTool;
-            ChangeState(0);
+            SetUnlock(false);
         }
 
-        /// <summary>
-        /// 0 is locked state,
-        /// 1 is unSelected state,
-        /// 2 is selected state.
-        /// </summary>
-        /// <param toolName="stateIndex"></param>
-        public void ChangeState(int stateIndex)
+        public void SetUnlock(bool unlocked)
         {
             Button button = GetComponent<Button>();
 
-            if (stateIndex == 0)
+            if (unlocked)
             {
-                lockIcon.gameObject.SetActive(true);
-                icon.gameObject.SetActive(false);
-                selectedIcon.gameObject.SetActive(false);
-                button.interactable = false;
-            }
-            else if (stateIndex == 1)
-            {
-                lockIcon.gameObject.SetActive(false);
-                icon.gameObject.SetActive(true);
-                selectedIcon.gameObject.SetActive(false);
-                button.interactable = true;
-            }
-            else if (stateIndex == 2)
-            {
-                lockIcon.gameObject.SetActive(false);
-                icon.gameObject.SetActive(true);
-                selectedIcon.gameObject.SetActive(true);
+                unlockContent.SetActive(true);
+                lockContent.SetActive(false);
                 button.interactable = true;
             }
             else
             {
-                Debug.LogError("State index is not exist");
+                unlockContent.SetActive(false);
+                lockContent.SetActive(true);
+                button.interactable = false;
             }
-
-            state = stateIndex;
         }
     }
 }

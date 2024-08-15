@@ -1,4 +1,3 @@
-using IdleClicker.Training;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,57 +8,44 @@ namespace IdleClicker.UI
     {
         // Variables
 
-        [SerializeField] private TextMeshProUGUI liftSpeed;
-        [SerializeField] private TextMeshProUGUI liftSpeedUpgradeCost;
-        [SerializeField] private TextMeshProUGUI earningBonus;
-        [SerializeField] private TextMeshProUGUI earningBonusUpgradeCost;
+        [SerializeField] private TextMeshProUGUI liftSpeedText;
+        [SerializeField] private TextMeshProUGUI liftSpeedUpgradeCostText;
+        [SerializeField] private TextMeshProUGUI earningBonusText;
+        [SerializeField] private TextMeshProUGUI earningBonusUpgradeCostText;
         [SerializeField] private Button upgradeLiftSpeedButton;
         [SerializeField] private Button upgradeEarningBonusButton;
 
-        private TrainingManager trainingManager;
+        private TrainingToolManager trainingToolManager;
+        private AssetManager assetManager;
 
 
         // Methods
 
         private void Start()
         {
-            trainingManager = FindObjectOfType<TrainingManager>();
+            trainingToolManager = FindObjectOfType<TrainingToolManager>();
+            assetManager = FindObjectOfType<AssetManager>();
 
             upgradeEarningBonusButton.onClick.AddListener(() =>
             {
-                trainingManager.UpgradeEarningBonus();
+                trainingToolManager.UpgradeEarningBonus();
             });
 
             upgradeLiftSpeedButton.onClick.AddListener(() =>
             {
-                trainingManager.UpgradeLiftSpeed();
+                trainingToolManager.UpgradeLiftSpeed();
             });
         }
 
         private void Update()
         {
-            upgradeEarningBonusButton.interactable = trainingManager.CanUpgradeEarningBonus;
-            upgradeLiftSpeedButton.interactable = trainingManager.CanUpgradeLiftSpeed;
+            upgradeEarningBonusButton.interactable = assetManager.Money >= trainingToolManager.EarningBonusUpgradeCost;
+            upgradeLiftSpeedButton.interactable = assetManager.Money >= trainingToolManager.LiftSpeedUpgradeCost;
 
-            if (liftSpeed != null)
-            {
-                liftSpeed.text = trainingManager.TimeInSecondOfTrainingAnimation.ToString("F1") + "s";
-            }
-
-            if (liftSpeedUpgradeCost != null)
-            {
-                liftSpeedUpgradeCost.text = "$" + trainingManager.LiftSpeedUpgradeCost.ToString("F1");
-            }
-
-            if (earningBonus != null)
-            {
-                earningBonus.text = trainingManager.EarningBonus.ToString();
-            }
-
-            if (earningBonusUpgradeCost != null)
-            {
-                earningBonusUpgradeCost.text = "$" + trainingManager.EarningBonusUpgradeCost.ToString("F1");
-            }
+            liftSpeedText.text = trainingToolManager.TrainingAnimationSpeedInRealTime.ToString("F1") + "s";
+            liftSpeedUpgradeCostText.text = "$" + trainingToolManager.LiftSpeedUpgradeCost.ToString("F1");
+            earningBonusText.text = trainingToolManager.EarningBonus.ToString();
+            earningBonusUpgradeCostText.text = "$" + trainingToolManager.EarningBonusUpgradeCost.ToString("F1");
         }
     }
 }

@@ -519,6 +519,8 @@ Transform:
   m_Children:
   - {fileID: 1819216358}
   - {fileID: 1593104485}
+  - {fileID: 1350226155}
+  - {fileID: 1389751501}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &108024243 stripped
@@ -3483,11 +3485,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8156738642806066890, guid: 635021388e23398489746a291410a25a, type: 3}
   m_PrefabInstance: {fileID: 1500061525}
   m_PrefabAsset: {fileID: 0}
---- !u!212 &776905254 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1044204857848229214, guid: 33f86814863d2f444b353476d0461203, type: 3}
-  m_PrefabInstance: {fileID: 5166964762535353518}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &777145804
 GameObject:
   m_ObjectHideFlags: 0
@@ -4761,8 +4758,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1819216357}
-        m_TargetAssemblyTypeName: IdleClicker.GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1389751502}
+        m_TargetAssemblyTypeName: IdleClicker.AssetManager, Assembly-CSharp
         m_MethodName: ExchangeStrengthForMoney
         m_Mode: 1
         m_Arguments:
@@ -5153,10 +5150,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f2ccb9bd9284d647a750f9ece6c655d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liftSpeed: {fileID: 849761800}
-  liftSpeedUpgradeCost: {fileID: 1777311233}
-  earningBonus: {fileID: 1832309906}
-  earningBonusUpgradeCost: {fileID: 1661247448}
+  liftSpeedText: {fileID: 849761800}
+  liftSpeedUpgradeCostText: {fileID: 1777311233}
+  earningBonusText: {fileID: 1832309906}
+  earningBonusUpgradeCostText: {fileID: 1661247448}
   upgradeLiftSpeedButton: {fileID: 1862762534}
   upgradeEarningBonusButton: {fileID: 777145806}
 --- !u!1 &1168313767
@@ -5238,11 +5235,6 @@ CanvasRenderer:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8156738642806066890, guid: 635021388e23398489746a291410a25a, type: 3}
   m_PrefabInstance: {fileID: 1937174162}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1219310659 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2326517739404948791, guid: 33f86814863d2f444b353476d0461203, type: 3}
-  m_PrefabInstance: {fileID: 5166964762535353518}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1250285581
 GameObject:
@@ -5742,6 +5734,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318994813}
   m_CullTransparentMesh: 1
+--- !u!1 &1350226154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1350226155}
+  - component: {fileID: 1350226156}
+  m_Layer: 0
+  m_Name: Training Tool Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1350226155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350226154}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 107700345}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1350226156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350226154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23902ff110465a54890fb45fd691513b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trainingTools:
+  - {fileID: 11400000, guid: ea04f000e92a08c42a3b554a2b1a649b, type: 2}
+  - {fileID: 11400000, guid: fce6bf49560eeaf43a690b5e1770d630, type: 2}
+  - {fileID: 11400000, guid: 4c04b084be499704e9924ab911f33caf, type: 2}
+  - {fileID: 11400000, guid: 8374cc68a7184e3438ef734a80d42d72, type: 2}
+  - {fileID: 11400000, guid: f50a16a5d428420488de187dbd1fa8b0, type: 2}
+  - {fileID: 11400000, guid: 774f161ce80f4be45a7ea84bc6d79176, type: 2}
+  - {fileID: 11400000, guid: fc23494b09e24ad40aac7058f7cc0009, type: 2}
 --- !u!1 &1353358692
 GameObject:
   m_ObjectHideFlags: 0
@@ -6026,6 +6070,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1368063183}
   m_CullTransparentMesh: 1
+--- !u!1 &1389751500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1389751501}
+  - component: {fileID: 1389751502}
+  m_Layer: 0
+  m_Name: Asset Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1389751501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389751500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 107700345}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1389751502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389751500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da990d96f0b7de40a611ffdbeca7638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1401396149
 GameObject:
   m_ObjectHideFlags: 0
@@ -7211,6 +7299,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 635021388e23398489746a291410a25a, type: 3}
+--- !u!114 &1704524220 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 948587529648321803, guid: 33f86814863d2f444b353476d0461203, type: 3}
+  m_PrefabInstance: {fileID: 5166964762535353518}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 873820dba5b1f1f4eb45cc1f62567c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1724871940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8753,7 +8852,7 @@ GameObject:
   - component: {fileID: 1819216358}
   - component: {fileID: 1819216357}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: Training Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8771,25 +8870,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ded692b5800cf40a56348548d15693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainingTools:
-  - {fileID: 11400000, guid: ea04f000e92a08c42a3b554a2b1a649b, type: 2}
-  - {fileID: 11400000, guid: fce6bf49560eeaf43a690b5e1770d630, type: 2}
-  - {fileID: 11400000, guid: 4c04b084be499704e9924ab911f33caf, type: 2}
-  - {fileID: 11400000, guid: 8374cc68a7184e3438ef734a80d42d72, type: 2}
-  - {fileID: 11400000, guid: f50a16a5d428420488de187dbd1fa8b0, type: 2}
-  - {fileID: 11400000, guid: 774f161ce80f4be45a7ea84bc6d79176, type: 2}
-  - {fileID: 11400000, guid: fc23494b09e24ad40aac7058f7cc0009, type: 2}
-  currentTrainingTool: {fileID: 0}
-  liftSpeedUpgradeCost: 10
-  earningBonus: 1
-  earningBonusUpgradeCost: 10
-  strength: 0
-  money: 0
+  characterAnimatorController: {fileID: 1704524220}
   trainingToolHolderUI: {fileID: 76494132}
-  trainingToolForBuyingHolderUI: {fileID: 1088879568}
-  bagGroupUI: {fileID: 37913520}
-  characterAnimator: {fileID: 1219310659}
-  toolSprite: {fileID: 776905254}
 --- !u!4 &1819216358
 Transform:
   m_ObjectHideFlags: 0

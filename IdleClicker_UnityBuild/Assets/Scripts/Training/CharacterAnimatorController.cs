@@ -4,16 +4,21 @@ using UnityEngine;
 
 namespace IdleClicker.Training
 {
-    public class CharacterAnimationTrigger : MonoBehaviour
+    public class CharacterAnimatorController : MonoBehaviour
     {
         // Variables
 
+        [Header("Popup text setting")]
         [SerializeField] private PopupText popupText;
         [SerializeField] private Canvas canvas;
         [SerializeField] private Transform spawnPopupTextPoint;
         [SerializeField] private float spawnPopupTextCircleRadius;
 
+        [Header("Tool visual")]
+        [SerializeField] private SpriteRenderer trainingToolVisual;
+
         private Animator animator;
+
         private float gainStrength;
 
         // Methods
@@ -21,6 +26,13 @@ namespace IdleClicker.Training
         private void Awake()
         {
             animator = GetComponent<Animator>();
+
+            FindObjectOfType<TrainingToolManager>().OnEquipTrainingTool += TrainingToolManager_OnEquipTrainingTool;
+        }
+
+        private void TrainingToolManager_OnEquipTrainingTool(TrainingToolSO trainingTool)
+        {
+            trainingToolVisual.sprite = trainingTool.ToolVisual;
         }
 
         private void OnDrawGizmos()
@@ -28,9 +40,10 @@ namespace IdleClicker.Training
             Gizmos.DrawWireSphere(spawnPopupTextPoint.position, spawnPopupTextCircleRadius);
         }
 
-        public void AnimationTrigger(float gainStrength)
+        public void AnimationTrigger(float gainStrength, float animatorSpeed)
         {
             StartCoroutine(AnimationTriggerCourotine());
+            animator.speed = animatorSpeed;
             this.gainStrength = gainStrength;
         }
 
@@ -46,7 +59,7 @@ namespace IdleClicker.Training
         public void SpawnPopupText()
         {
             PopupText popupTextInstance = Instantiate(popupText, canvas.transform);
-            popupTextInstance.SetValue(gainStrength);
+            popupTextInstance.SetValue((int)gainStrength);
 
             Vector2 spawnPosition = spawnPopupTextPoint.position;
             spawnPosition.x += Random.Range(-spawnPopupTextCircleRadius, spawnPopupTextCircleRadius);
@@ -57,12 +70,17 @@ namespace IdleClicker.Training
 
         public void GainStrength()
         {
-            FindObjectOfType<TrainingManager>().GainStrength();
+            FindObjectOfType<AssetManager>().ChangeStrengthValue(gainStrength);
         }
 
         public void ResetCanLift()
         {
             FindObjectOfType<TrainingManager>().SetCanLift(true);
+        }
+
+        public void ResetAnimatorSpeed()
+        {
+            animator.speed = 1;
         }
     }
 }

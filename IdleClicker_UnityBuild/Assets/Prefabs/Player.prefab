@@ -225,6 +225,7 @@ MonoBehaviour:
   canvas: {fileID: 6703289973289712708}
   spawnPopupTextPoint: {fileID: 132654020935549550}
   spawnPopupTextCircleRadius: 0.8
+  trainingToolVisual: {fileID: 1044204857848229214}
 --- !u!1 &3357595391126823436
 GameObject:
   m_ObjectHideFlags: 0

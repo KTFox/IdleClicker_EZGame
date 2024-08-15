@@ -1,4 +1,3 @@
-using IdleClicker.Training;
 using UnityEngine;
 
 namespace IdleClicker.UI
@@ -14,49 +13,30 @@ namespace IdleClicker.UI
 
         // Methods
 
-        private void Awake()
+        private void OnEnable()
+        {
+            FindObjectOfType<TrainingToolManager>().OnTraingToolManagerUpdate += TrainingToolManager_OnTraingToolManagerUpdate;
+        }
+
+        private void TrainingToolManager_OnTraingToolManagerUpdate()
         {
             foreach (Transform child in bagContent.transform)
             {
                 Destroy(child.gameObject);
             }
 
-            foreach (TrainingToolSO trainingTool in FindObjectOfType<TrainingManager>().TrainingTools)
+            foreach (TrainingToolManager.TrainingToolConfig trainingToolConfig in FindObjectOfType<TrainingToolManager>().TrainingToolConfigs)
             {
                 TrainingToolSlotUI trainingToolSlot = Instantiate(trainingToolSlotPrefab, bagContent.transform);
-                trainingToolSlot.Setup(trainingTool);
-            }
-        }
+                trainingToolSlot.Setup(trainingToolConfig.TrainingTool);
 
-        public void UpdateTrainingToolSlotState(TrainingToolSO trainingTool, int state)
-        {
-            TrainingToolSlotUI[] trainingToolSlots = bagContent.GetComponentsInChildren<TrainingToolSlotUI>();
-
-            if (state == 2)
-            {
-                foreach (TrainingToolSlotUI trainingToolSlot in trainingToolSlots)
+                if (trainingToolConfig.HasBought)
                 {
-                    if (trainingToolSlot.State == 2)
-                    {
-                        trainingToolSlot.ChangeState(1);
-                    }
-
-                    if (trainingToolSlot.TrainingTool == trainingTool)
-                    {
-                        trainingToolSlot.ChangeState(2);
-                    }
+                    trainingToolSlot.SetUnlock(true);
                 }
-
-                SetSelectedTool(trainingTool);
-            }
-            else
-            {
-                foreach (TrainingToolSlotUI trainingToolSlot in trainingToolSlots)
+                else
                 {
-                    if (trainingToolSlot.TrainingTool == trainingTool)
-                    {
-                        trainingToolSlot.ChangeState(state);
-                    }
+                    trainingToolSlot.SetUnlock(false);
                 }
             }
         }
