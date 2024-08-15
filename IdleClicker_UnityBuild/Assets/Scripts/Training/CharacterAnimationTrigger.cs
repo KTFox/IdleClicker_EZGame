@@ -57,12 +57,12 @@ namespace IdleClicker.Training
 
         public void GainStrength()
         {
-            TrainingManager.Instance.GainStrength();
+            FindObjectOfType<TrainingManager>().GainStrength();
         }
 
         public void ResetCanLift()
         {
-            TrainingManager.Instance.SetCanLift(true);
+            FindObjectOfType<TrainingManager>().SetCanLift(true);
         }
     }
 }

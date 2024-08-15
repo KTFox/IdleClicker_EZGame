@@ -9,8 +9,6 @@ namespace IdleClicker.Training
     {
         // Variables
 
-        public static TrainingManager Instance;
-
         private float ORIGINAL_TIME_OF_CHARACTER_TRAINING_ANIMATION = 1f;
         private const float AUTO_LIFTING_SPEED = 4f;
         private const float MIN_LIFTING_SPEED = 0.1f;
@@ -20,15 +18,15 @@ namespace IdleClicker.Training
 
         [SerializeField] private List<TrainingToolSO> trainingTools = new List<TrainingToolSO>();
 
-        [Header("Training info")]
-        [SerializeField] private TrainingToolSO currentTrainingTool;
-        [SerializeField] private float liftSpeedUpgradeCost = 10f;
-        [SerializeField][Min(1f)] private float earningBonus = 1.0f;
-        [SerializeField] private float earningBonusUpgradeCost = 10f;
+        // Training info
+        private TrainingToolSO currentTrainingTool;
+        private float liftSpeedUpgradeCost = 10f;
+        private float earningBonus = 1.0f;
+        private float earningBonusUpgradeCost = 10f;
 
-        [Header("Asset info")]
-        [SerializeField] private float strength;
-        [SerializeField] private float money;
+        // Asset info
+        private float strength;
+        private float money;
 
         [Header("UI")]
         [SerializeField] private TrainingToolHolderUI trainingToolHolderUI;
@@ -64,11 +62,6 @@ namespace IdleClicker.Training
 
         // Methods
 
-        private void Awake()
-        {
-            Instance = this;
-        }
-
         private void Start()
         {
             BuyTrainingTool();
@@ -78,36 +71,6 @@ namespace IdleClicker.Training
         {
             HandleAutoLift();
             HandleManualLift();
-        }
-
-        private void HandleAutoLift()
-        {
-            autoLiftTimer -= Time.deltaTime;
-            if (autoLiftTimer <= 0)
-            {
-                autoLiftTimer = AUTO_LIFTING_SPEED;
-                trainingToolHolderUI.RunCooldown();
-                characterAnimator.GetComponent<CharacterAnimationTrigger>().AnimationTrigger((int)currentTrainingTool.EarningPerLift * earningBonus);
-            }
-        }
-
-        private void HandleManualLift()
-        {
-            if (Input.touchCount > 0)
-            {
-                Touch touch = Input.GetTouch(0);
-
-                if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId) && touch.phase == TouchPhase.Began)
-                {
-                    if (canLift)
-                    {
-                        autoLiftTimer = AUTO_LIFTING_SPEED;
-                        canLift = false;
-                        trainingToolHolderUI.RunCooldown();
-                        characterAnimator.GetComponent<CharacterAnimationTrigger>().AnimationTrigger(currentTrainingTool.EarningPerLift * earningBonus);
-                    }
-                }
-            }
         }
 
         public void BuyTrainingTool()
@@ -147,6 +110,35 @@ namespace IdleClicker.Training
             toolSprite.sprite = trainingTool.ToolVisual;
             trainingToolHolderUI.UpdateIcon(trainingTool);
             bagGroupUI.UpdateTrainingToolSlotState(trainingTool, 2);
+        }
+        private void HandleAutoLift()
+        {
+            autoLiftTimer -= Time.deltaTime;
+            if (autoLiftTimer <= 0)
+            {
+                autoLiftTimer = AUTO_LIFTING_SPEED;
+                trainingToolHolderUI.RunCooldown();
+                characterAnimator.GetComponent<CharacterAnimationTrigger>().AnimationTrigger((int)currentTrainingTool.EarningPerLift * earningBonus);
+            }
+        }
+
+        private void HandleManualLift()
+        {
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+
+                if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId) && touch.phase == TouchPhase.Began)
+                {
+                    if (canLift)
+                    {
+                        autoLiftTimer = AUTO_LIFTING_SPEED;
+                        canLift = false;
+                        trainingToolHolderUI.RunCooldown();
+                        characterAnimator.GetComponent<CharacterAnimationTrigger>().AnimationTrigger(currentTrainingTool.EarningPerLift * earningBonus);
+                    }
+                }
+            }
         }
 
         public void ExchangeStrengthForMoney()

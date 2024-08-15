@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 namespace IdleClicker.Battle
 {
@@ -179,6 +180,11 @@ namespace IdleClicker.Battle
         public void ResetCanOpponentLift()
         {
             canOpponentLift = true;
+        }
+
+        public void ReturnTrainingRoom()
+        {
+            SceneManager.LoadScene("TrainingRoom");
         }
     }
 }

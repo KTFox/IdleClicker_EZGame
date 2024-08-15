@@ -24,7 +24,7 @@ namespace IdleClicker.UI
         {
             equipButton.onClick.AddListener(() =>
             {
-                TrainingManager.Instance.EquipTrainingTool(currentSelectedTool);
+                FindObjectOfType<TrainingManager>().EquipTrainingTool(currentSelectedTool);
             });
         }
 
@@ -35,7 +35,7 @@ namespace IdleClicker.UI
             toolName.text = trainingTool.ToolName;
             value.text = $"Strength gain {trainingTool.EarningPerLift}";
 
-            if (TrainingManager.Instance.CurrentTrainingTool == trainingTool)
+            if (FindObjectOfType<TrainingManager>().CurrentTrainingTool == trainingTool)
             {
                 equipButton.interactable = false;
                 equipButtonText.text = "Equipped";

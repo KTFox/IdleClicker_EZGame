@@ -13,7 +13,7 @@ namespace IdleClicker.UI
         [SerializeField] private Button buyingButton;
         [SerializeField] private TextMeshProUGUI buyingCost;
 
-        private TrainingManager gameManager;
+        private TrainingManager trainingManager;
 
         // Properties
 
@@ -24,24 +24,24 @@ namespace IdleClicker.UI
         {
             buyingButton.onClick.AddListener(() =>
             {
-                TrainingManager.Instance.BuyTrainingTool();
+                FindObjectOfType<TrainingManager>().BuyTrainingTool();
             });
         }
 
         private void Start()
         {
-            gameManager = TrainingManager.Instance;
+            trainingManager = FindObjectOfType<TrainingManager>();
         }
 
         private void Update()
         {
-            buyingButton.interactable = gameManager.CanBuyingNewTrainingTool;
+            buyingButton.interactable = trainingManager.CanBuyingNewTrainingTool;
         }
 
         public void UpdateHolderInfo(TrainingToolSO trainingToolSO)
         {
-            icon.sprite = gameManager.TrainingToolForBuying.Icon;
-            buyingCost.text = "$" + gameManager.TrainingToolForBuying.Cost.ToString();
+            icon.sprite = trainingManager.TrainingToolForBuying.Icon;
+            buyingCost.text = "$" + trainingManager.TrainingToolForBuying.Cost.ToString();
         }
     }
 }

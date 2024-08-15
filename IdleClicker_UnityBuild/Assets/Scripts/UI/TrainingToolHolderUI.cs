@@ -11,7 +11,7 @@ namespace IdleClicker.UI
         [SerializeField] private Image icon;
         [SerializeField] private Image cooldownBackground;
 
-        private TrainingManager gameManager;
+        private TrainingManager trainingManager;
         private float timeElapsed;
         private float duration;
         private bool isRunning;
@@ -21,12 +21,12 @@ namespace IdleClicker.UI
 
         private void Start()
         {
-            gameManager = TrainingManager.Instance;
+            trainingManager = FindObjectOfType<TrainingManager>();
         }
 
         private void Update()
         {
-            duration = gameManager.TimeInSecondOfTrainingAnimation;
+            duration = trainingManager.TimeInSecondOfTrainingAnimation;
 
             if (isRunning)
             {

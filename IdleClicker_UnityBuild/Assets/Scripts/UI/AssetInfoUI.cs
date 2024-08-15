@@ -11,7 +11,7 @@ namespace IdleClicker.UI
         [SerializeField] private TextMeshProUGUI strengthValue;
         [SerializeField] private TextMeshProUGUI moneyValue;
 
-        private TrainingManager gameManager;
+        private TrainingManager trainingManager;
 
         // Properties
 
@@ -20,13 +20,13 @@ namespace IdleClicker.UI
 
         private void Start()
         {
-            gameManager = TrainingManager.Instance;
+            trainingManager = FindObjectOfType<TrainingManager>();
         }
 
         private void Update()
         {
-            strengthValue.text = ((int)gameManager.Strength).ToString();
-            moneyValue.text = ((int)gameManager.Money).ToString();
+            strengthValue.text = ((int)trainingManager.Strength).ToString();
+            moneyValue.text = ((int)trainingManager.Money).ToString();
         }
     }
 }

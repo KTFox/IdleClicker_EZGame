@@ -16,49 +16,49 @@ namespace IdleClicker.UI
         [SerializeField] private Button upgradeLiftSpeedButton;
         [SerializeField] private Button upgradeEarningBonusButton;
 
-        private TrainingManager gameManager;
+        private TrainingManager trainingManager;
 
 
         // Methods
 
         private void Start()
         {
-            gameManager = TrainingManager.Instance;
+            trainingManager = FindObjectOfType<TrainingManager>();
 
             upgradeEarningBonusButton.onClick.AddListener(() =>
             {
-                gameManager.UpgradeEarningBonus();
+                trainingManager.UpgradeEarningBonus();
             });
 
             upgradeLiftSpeedButton.onClick.AddListener(() =>
             {
-                gameManager.UpgradeLiftSpeed();
+                trainingManager.UpgradeLiftSpeed();
             });
         }
 
         private void Update()
         {
-            upgradeEarningBonusButton.interactable = gameManager.CanUpgradeEarningBonus;
-            upgradeLiftSpeedButton.interactable = gameManager.CanUpgradeLiftSpeed;
+            upgradeEarningBonusButton.interactable = trainingManager.CanUpgradeEarningBonus;
+            upgradeLiftSpeedButton.interactable = trainingManager.CanUpgradeLiftSpeed;
 
             if (liftSpeed != null)
             {
-                liftSpeed.text = gameManager.TimeInSecondOfTrainingAnimation.ToString("F1") + "s";
+                liftSpeed.text = trainingManager.TimeInSecondOfTrainingAnimation.ToString("F1") + "s";
             }
 
             if (liftSpeedUpgradeCost != null)
             {
-                liftSpeedUpgradeCost.text = "$" + gameManager.LiftSpeedUpgradeCost.ToString("F1");
+                liftSpeedUpgradeCost.text = "$" + trainingManager.LiftSpeedUpgradeCost.ToString("F1");
             }
 
             if (earningBonus != null)
             {
-                earningBonus.text = gameManager.EarningBonus.ToString();
+                earningBonus.text = trainingManager.EarningBonus.ToString();
             }
 
             if (earningBonusUpgradeCost != null)
             {
-                earningBonusUpgradeCost.text = "$" + gameManager.EarningBonusUpgradeCost.ToString("F1");
+                earningBonusUpgradeCost.text = "$" + trainingManager.EarningBonusUpgradeCost.ToString("F1");
             }
         }
     }
