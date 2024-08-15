@@ -38,6 +38,8 @@ namespace IdleClicker.Battle
 
         // Properties
 
+        public float PlayerCurrentStrength => playerCurrentStrength;
+        public float OpponentCurrentStrength => opponentCurrentStrength;
         public float PlayerLiftAnimatorSpeed => playerLiftAnimatorSpeed;
         public int CurrentTime => (int)currentTime;
 
