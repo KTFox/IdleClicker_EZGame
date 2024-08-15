@@ -28,6 +28,7 @@ namespace IdleClicker.Battle
         [Header("UI")]
         [SerializeField] private GameObject prepareTitlePanel;
         [SerializeField] private SpriteRenderer playerToolSprite;
+        [SerializeField] private ResultPanel resultPanel;
 
         private bool canPlayerLift = true;
         private bool canOpponentLift = true;
@@ -109,6 +110,15 @@ namespace IdleClicker.Battle
 
                     if (currentTime <= 0f)
                     {
+                        if (playerCurrentStrength >= opponentCurrentStrength)
+                        {
+                            resultPanel.TurnOnResultPanel(true);
+                        }
+                        else
+                        {
+                            resultPanel.TurnOnResultPanel(false);
+                        }
+
                         currentState = BattleState.Ending;
                     }
 
