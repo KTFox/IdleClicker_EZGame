@@ -6852,6 +6852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   opponenets:
   - {fileID: 11400000, guid: e75c393bfc389444f9620cf93637edee, type: 2}
+  - {fileID: 11400000, guid: d88c4a7e2fa58184280f8835116a497a, type: 2}
 --- !u!1 &1602746627
 GameObject:
   m_ObjectHideFlags: 0

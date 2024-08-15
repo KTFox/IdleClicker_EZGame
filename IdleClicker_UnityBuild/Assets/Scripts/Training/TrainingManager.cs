@@ -11,7 +11,7 @@ namespace IdleClicker.Training
 
         public static TrainingManager Instance;
 
-        private float ORIGINAL_TIME_OF_CHARACTER_TRAINING_ANIMATION = 2f;
+        private float ORIGINAL_TIME_OF_CHARACTER_TRAINING_ANIMATION = 1f;
         private const float AUTO_LIFTING_SPEED = 4f;
         private const float MIN_LIFTING_SPEED = 0.1f;
         private const float DECREASING_LIFT_SPEED_PER_LEVEL = 0.1f;
@@ -57,6 +57,9 @@ namespace IdleClicker.Training
         public bool CanBuyingNewTrainingTool => money >= trainingTools[trainingToolForBuyingIndex].Cost;
         public bool CanUpgradeLiftSpeed => money >= LiftSpeedUpgradeCost;
         public bool CanUpgradeEarningBonus => money >= EarningBonusUpgradeCost;
+        public float AnimatorSpeed => characterAnimator.speed;
+        public float EarningPerLift => currentTrainingTool.EarningPerLift * earningBonus;
+        public Sprite ToolVisual => toolSprite.sprite;
 
 
         // Methods
@@ -84,7 +87,7 @@ namespace IdleClicker.Training
             {
                 autoLiftTimer = AUTO_LIFTING_SPEED;
                 trainingToolHolderUI.RunCooldown();
-                characterAnimator.GetComponent<CharacterAnimationTrigger>().AnimationTrigger(currentTrainingTool.EarningPerLift * earningBonus);
+                characterAnimator.GetComponent<CharacterAnimationTrigger>().AnimationTrigger((int)currentTrainingTool.EarningPerLift * earningBonus);
             }
         }
 

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa3c6c9cff4b6fb4e96c5ec807df095a, type: 3}
-  m_Name: Alice
+  m_Name: Bob
   m_EditorClassIdentifier: 
-  opponentName: Alice
-  avatar: {fileID: 21300000, guid: c94dda8358a31364fa2d27dea18d31a9, type: 3}
-  reward: 1000
-  trainingTool: {fileID: 11400000, guid: ea04f000e92a08c42a3b554a2b1a649b, type: 2}
-  animatorController: {fileID: 9100000, guid: f7359e098cef13d43acd6fefbf086e37, type: 2}
-  animatorSpeed: 1
+  opponentName: Bob
+  avatar: {fileID: 21300000, guid: a6c4886e1795b7b4697d0afd67d05983, type: 3}
+  reward: 2500
+  trainingTool: {fileID: 11400000, guid: fce6bf49560eeaf43a690b5e1770d630, type: 2}
+  animatorController: {fileID: 9100000, guid: afdabf8ee06880c4989d5f4ee7ad3a58, type: 2}
+  animatorSpeed: 1.2

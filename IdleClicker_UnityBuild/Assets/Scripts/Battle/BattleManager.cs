@@ -13,18 +13,21 @@ namespace IdleClicker.Battle
 
         [Header("Player info")]
         [SerializeField] private float playerCurrentStrength;
-        [SerializeField] private float playerLiftSpeed = 2f;
+        [SerializeField] private float playerLiftAnimatorSpeed;
         [SerializeField] private float playerEarningPerLift;
         [SerializeField] private PlayerAnimationTrigger playerAnimationTrigger;
 
         [Header("Opponent info")]
         [SerializeField] private float opponentCurrentStrength;
         [SerializeField] private float opponentLiftSpeed;
-        [SerializeField] private float opponentEarningperLift;
+        [SerializeField] private float opponentEarningPerLift;
         [SerializeField] private OpponentAnimationTrigger opponentAnimationTrigger;
+        [SerializeField] private Animator opponentAnimator;
+        [SerializeField] private SpriteRenderer opponentToolSprite;
 
         [Header("UI")]
         [SerializeField] private GameObject prepareTitlePanel;
+        [SerializeField] private SpriteRenderer playerToolSprite;
 
         private bool canPlayerLift = true;
         private bool canOpponentLift = true;
@@ -35,7 +38,7 @@ namespace IdleClicker.Battle
 
         // Properties
 
-        public float PlayerLiftSpeed => playerLiftSpeed;
+        public float PlayerLiftAnimatorSpeed => playerLiftAnimatorSpeed;
         public int CurrentTime => (int)currentTime;
 
         // enum
@@ -51,11 +54,25 @@ namespace IdleClicker.Battle
         private void Awake()
         {
             Instance = this;
+
+            PersistenceData persistenceData = Resources.Load<PersistenceData>("PersistenceData");
+            if (persistenceData == null)
+            {
+                Debug.LogError("Persistence data is not found");
+            }
+
+            playerLiftAnimatorSpeed = persistenceData.playerAnimatorSpeed;
+            playerEarningPerLift = persistenceData.playerEarningPerLift;
+            playerToolSprite.sprite = persistenceData.playerToolVisual;
+            opponentLiftSpeed = persistenceData.opponentSO.AnimatorSpeed;
+            opponentEarningPerLift = persistenceData.opponentSO.TrainingTool.EarningPerLift;
+            opponentAnimator.runtimeAnimatorController = persistenceData.opponentSO.AnimatorController;
+            opponentToolSprite.sprite = persistenceData.opponentSO.TrainingTool.ToolVisual;
         }
 
         private void Start()
         {
-            playerAnimationTrigger.GetComponent<Animator>().speed = playerLiftSpeed;
+            playerAnimationTrigger.GetComponent<Animator>().speed = playerLiftAnimatorSpeed;
             opponentAnimationTrigger.GetComponent<Animator>().speed = opponentLiftSpeed;
 
             currentTime = MATCH_TIME;
@@ -117,7 +134,7 @@ namespace IdleClicker.Battle
                     if (canPlayerLift)
                     {
                         canPlayerLift = false;
-                        playerAnimationTrigger.AnimationTrigger(playerEarningPerLift);
+                        playerAnimationTrigger.AnimationTrigger((int)playerEarningPerLift);
                     }
                 }
             }
@@ -128,7 +145,7 @@ namespace IdleClicker.Battle
             if (canOpponentLift)
             {
                 canOpponentLift = false;
-                opponentAnimationTrigger.AnimationTrigger(opponentEarningperLift);
+                opponentAnimationTrigger.AnimationTrigger((int)opponentEarningPerLift);
             }
         }
 
@@ -144,7 +161,7 @@ namespace IdleClicker.Battle
 
         public void GainOpponentStrength()
         {
-            opponentCurrentStrength += opponentEarningperLift;
+            opponentCurrentStrength += opponentEarningPerLift;
         }
 
         public void ResetCanOpponentLift()

@@ -1305,14 +1305,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCurrentStrength: 0
-  playerLiftSpeed: 1
-  playerEarningPerLift: 10
+  playerLiftAnimatorSpeed: 0
+  playerEarningPerLift: 0
   playerAnimationTrigger: {fileID: 4298743497147115396}
   opponentCurrentStrength: 0
-  opponentLiftSpeed: 2
-  opponentEarningperLift: 20
+  opponentLiftSpeed: 0
+  opponentEarningPerLift: 0
   opponentAnimationTrigger: {fileID: 1934374860}
+  opponentAnimator: {fileID: 1934374861}
+  opponentToolSprite: {fileID: 1377444217}
   prepareTitlePanel: {fileID: 911542694}
+  playerToolSprite: {fileID: 1044204857356162506}
 --- !u!1 &1934374858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,7 +1377,7 @@ Animator:
   m_GameObject: {fileID: 1934374858}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f7359e098cef13d43acd6fefbf086e37, type: 2}
+  m_Controller: {fileID: 9100000, guid: afdabf8ee06880c4989d5f4ee7ad3a58, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

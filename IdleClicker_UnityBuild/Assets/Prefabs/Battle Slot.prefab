@@ -152,6 +152,7 @@ MonoBehaviour:
   avatar: {fileID: 4808816052305509074}
   opponentName: {fileID: 5936579610960858414}
   reward: {fileID: 6584655567987735354}
+  fightButton: {fileID: 5845768631007154045}
 --- !u!1 &5485678560567221729
 GameObject:
   m_ObjectHideFlags: 0
