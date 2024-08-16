@@ -34,6 +34,8 @@ namespace IdleClicker.Battle
 
         private BattleState currentState = BattleState.Preparing;
 
+        private PersistenceData persistenceData;
+
         // Properties
 
         public float PlayerCurrentStrength => playerCurrentStrength;
@@ -50,14 +52,17 @@ namespace IdleClicker.Battle
 
         // Methods
 
-        private void Start()
+        private void Awake()
         {
-            PersistenceData persistenceData = Resources.Load<PersistenceData>("PersistenceData");
+            persistenceData = Resources.Load<PersistenceData>("PersistenceData");
             if (persistenceData == null)
             {
                 Debug.LogError("Persistence data is not found");
             }
+        }
 
+        private void Start()
+        {
             playerAnimationTrigger.GetComponent<Animator>().speed = persistenceData.LiftSpeed;
             playerEarningPerLift = persistenceData.CurrentTrainingTool.EarningPerLift * persistenceData.EarningBonus;
             playerToolSprite.sprite = persistenceData.CurrentTrainingTool.ToolVisual;
@@ -101,19 +106,16 @@ namespace IdleClicker.Battle
                     {
                         if (playerCurrentStrength >= opponentCurrentStrength)
                         {
-                            PersistenceData persistenceData = Resources.Load<PersistenceData>("PersistenceData");
-                            if (persistenceData == null)
-                            {
-                                Debug.LogError("Persistence data is not found");
-                            }
-
                             persistenceData.Money += persistenceData.Fighter.Reward;
 
                             for (int i = 0; i < persistenceData.OpponentConfigs.Length; i++)
                             {
                                 if (persistenceData.OpponentConfigs[i].Opponent == persistenceData.Fighter)
                                 {
-                                    persistenceData.OpponentConfigs[i + 1].IsUnlocked = true;
+                                    if (i < persistenceData.OpponentConfigs.Length - 1)
+                                    {
+                                        persistenceData.OpponentConfigs[i + 1].IsUnlocked = true;
+                                    }
                                 }
                             }
 
@@ -188,7 +190,7 @@ namespace IdleClicker.Battle
 
         public void ReturnTrainingRoom()
         {
-            SceneManager.LoadScene("TrainingRoom");
+            SceneManager.LoadSceneAsync(0);
         }
     }
 }

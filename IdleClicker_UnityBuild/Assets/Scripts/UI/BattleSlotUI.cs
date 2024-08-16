@@ -29,7 +29,7 @@ namespace IdleClicker.UI
             fightButton.onClick.AddListener(() =>
             {
                 FindObjectOfType<BattleInfoManager>().SetFighter(this.opponent);
-                SceneManager.LoadScene("Battle");
+                SceneManager.LoadSceneAsync(1);
             });
         }
 

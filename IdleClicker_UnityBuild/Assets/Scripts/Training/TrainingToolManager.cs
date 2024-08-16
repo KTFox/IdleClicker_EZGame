@@ -136,7 +136,7 @@ namespace IdleClicker
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             PersistenceData persistenceData = Resources.Load<PersistenceData>("PersistenceData");
             if (persistenceData == null)
