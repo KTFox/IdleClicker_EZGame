@@ -69,7 +69,6 @@ namespace IdleClicker
             else
             {
                 opponentConfigs = persistenceData.OpponentConfigs;
-                OnOpponentConfigUpdate?.Invoke();
             }
         }
 

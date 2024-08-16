@@ -1984,6 +1984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winPanel: {fileID: 500925197}
   losePanel: {fileID: 1664987111}
+  rewardValue: {fileID: 1356041797}
 --- !u!1 &757017849
 GameObject:
   m_ObjectHideFlags: 0
@@ -5114,18 +5115,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3677eb188fa93e542b87c6f563cd2331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCurrentStrength: 0
-  playerLiftAnimatorSpeed: 0
-  playerEarningPerLift: 0
+  playerToolSprite: {fileID: 1044204857356162506}
   playerAnimationTrigger: {fileID: 4298743497147115396}
-  opponentCurrentStrength: 0
-  opponentLiftSpeed: 0
-  opponentEarningPerLift: 0
   opponentAnimationTrigger: {fileID: 1934374860}
   opponentAnimator: {fileID: 1934374861}
   opponentToolSprite: {fileID: 1377444217}
   prepareTitlePanel: {fileID: 911542694}
-  playerToolSprite: {fileID: 1044204857356162506}
   resultPanel: {fileID: 737800534}
 --- !u!1 &1934374858
 GameObject:

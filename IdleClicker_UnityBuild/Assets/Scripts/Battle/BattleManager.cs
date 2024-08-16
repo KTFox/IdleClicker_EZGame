@@ -109,7 +109,15 @@ namespace IdleClicker.Battle
 
                             persistenceData.Money += persistenceData.Fighter.Reward;
 
-                            resultPanel.TurnOnResultPanel(true);
+                            for (int i = 0; i < persistenceData.OpponentConfigs.Length; i++)
+                            {
+                                if (persistenceData.OpponentConfigs[i].Opponent == persistenceData.Fighter)
+                                {
+                                    persistenceData.OpponentConfigs[i + 1].IsUnlocked = true;
+                                }
+                            }
+
+                            resultPanel.TurnOnResultPanel(true, persistenceData.Fighter.Reward);
                         }
                         else
                         {

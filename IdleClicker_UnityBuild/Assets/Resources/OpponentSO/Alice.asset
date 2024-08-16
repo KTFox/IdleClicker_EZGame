@@ -17,4 +17,4 @@ MonoBehaviour:
   reward: 1000
   trainingTool: {fileID: 11400000, guid: ea04f000e92a08c42a3b554a2b1a649b, type: 2}
   animatorController: {fileID: 9100000, guid: f7359e098cef13d43acd6fefbf086e37, type: 2}
-  animatorSpeed: 1
+  liftSpeed: 1

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 namespace IdleClicker
@@ -8,6 +9,7 @@ namespace IdleClicker
 
         [SerializeField] private GameObject winPanel;
         [SerializeField] private GameObject losePanel;
+        [SerializeField] private TextMeshProUGUI rewardValue;
 
 
         // Methods
@@ -18,11 +20,12 @@ namespace IdleClicker
             losePanel.SetActive(false);
         }
 
-        public void TurnOnResultPanel(bool isWin)
+        public void TurnOnResultPanel(bool isWin, float reward = 0f)
         {
             if (isWin)
             {
                 winPanel.SetActive(true);
+                rewardValue.text = $"+{reward}";
             }
             else
             {
