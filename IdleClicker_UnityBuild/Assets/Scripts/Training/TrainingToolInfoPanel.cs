@@ -24,6 +24,7 @@ namespace IdleClicker.Training
             equipButton.onClick.AddListener(() =>
             {
                 FindObjectOfType<TrainingToolManager>().EquipTrainingTool(currentSelectedTool);
+                Setup(currentSelectedTool);
             });
         }
 

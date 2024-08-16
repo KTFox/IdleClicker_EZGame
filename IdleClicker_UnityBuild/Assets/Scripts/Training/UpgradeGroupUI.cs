@@ -44,7 +44,7 @@ namespace IdleClicker.Training
 
             liftSpeedText.text = trainingToolManager.TrainingAnimationSpeedInRealTime.ToString("F1") + "s";
             liftSpeedUpgradeCostText.text = "$" + trainingToolManager.LiftSpeedUpgradeCost.ToString("F1");
-            earningBonusText.text = trainingToolManager.EarningBonus.ToString();
+            earningBonusText.text = $"x{trainingToolManager.EarningBonus.ToString("F1")}";
             earningBonusUpgradeCostText.text = "$" + trainingToolManager.EarningBonusUpgradeCost.ToString("F1");
         }
     }

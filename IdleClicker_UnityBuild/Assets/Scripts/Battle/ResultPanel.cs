@@ -25,7 +25,7 @@ namespace IdleClicker.Battle
             if (isWin)
             {
                 winPanel.SetActive(true);
-                rewardValue.text = $"+{reward}";
+                rewardValue.text = $"{reward}";
             }
             else
             {
