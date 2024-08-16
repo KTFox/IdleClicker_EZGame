@@ -1,9 +1,7 @@
-using IdleClicker.Battle;
-using IdleClicker.UI;
 using System.Collections;
 using UnityEngine;
 
-namespace IdleClicker
+namespace IdleClicker.Battle
 {
     public class PlayerAnimationTrigger : MonoBehaviour
     {

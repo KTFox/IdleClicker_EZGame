@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace IdleClicker
+namespace IdleClicker.Training
 {
     public class TrainingToolHolderUI : MonoBehaviour
     {

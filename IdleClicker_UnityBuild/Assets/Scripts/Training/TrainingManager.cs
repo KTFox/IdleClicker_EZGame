@@ -1,4 +1,3 @@
-using IdleClicker.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 

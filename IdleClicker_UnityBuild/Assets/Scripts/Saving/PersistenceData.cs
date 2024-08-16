@@ -1,6 +1,7 @@
+using IdleClicker.Training;
 using UnityEngine;
 
-namespace IdleClicker
+namespace IdleClicker.Saving
 {
     [CreateAssetMenu(menuName = "PersistenceData")]
     public class PersistenceData : ScriptableObject

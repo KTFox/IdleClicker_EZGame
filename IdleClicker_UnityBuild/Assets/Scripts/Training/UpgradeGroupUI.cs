@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace IdleClicker.UI
+namespace IdleClicker.Training
 {
     public class UpgradeGroupUI : MonoBehaviour
     {

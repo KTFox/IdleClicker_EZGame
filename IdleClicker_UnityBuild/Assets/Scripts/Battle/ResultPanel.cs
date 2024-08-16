@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace IdleClicker
+namespace IdleClicker.Battle
 {
     public class ResultPanel : MonoBehaviour
     {

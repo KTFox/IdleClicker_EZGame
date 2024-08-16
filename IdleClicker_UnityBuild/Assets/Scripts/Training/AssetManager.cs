@@ -1,6 +1,7 @@
+using IdleClicker.Saving;
 using UnityEngine;
 
-namespace IdleClicker
+namespace IdleClicker.Training
 {
     public class AssetManager : MonoBehaviour
     {

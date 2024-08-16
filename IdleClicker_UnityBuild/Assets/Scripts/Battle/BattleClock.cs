@@ -1,8 +1,7 @@
-using IdleClicker.Battle;
 using TMPro;
 using UnityEngine;
 
-namespace IdleClicker
+namespace IdleClicker.Battle
 {
     public class BattleClock : MonoBehaviour
     {

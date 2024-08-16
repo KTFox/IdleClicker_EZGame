@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace IdleClicker.UI
+namespace IdleClicker.Training
 {
     public class BattleSlotUI : MonoBehaviour
     {

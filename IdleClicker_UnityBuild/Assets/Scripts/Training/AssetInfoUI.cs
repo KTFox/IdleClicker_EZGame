@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace IdleClicker.UI
+namespace IdleClicker.Training
 {
     public class AssetInfoUI : MonoBehaviour
     {

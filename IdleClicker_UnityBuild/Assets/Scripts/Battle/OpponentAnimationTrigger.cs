@@ -1,4 +1,3 @@
-using IdleClicker.UI;
 using System.Collections;
 using UnityEngine;
 

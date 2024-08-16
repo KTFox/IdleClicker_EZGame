@@ -1,8 +1,9 @@
+using IdleClicker.Saving;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace IdleClicker
+namespace IdleClicker.Training
 {
     public class BattleInfoManager : MonoBehaviour
     {
