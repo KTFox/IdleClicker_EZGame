@@ -14,6 +14,8 @@ namespace IdleClicker.Audio
         [SerializeField] private AudioClip closeTab;
         [SerializeField] private AudioClip selectTrainingTool;
         [SerializeField] private AudioClip equipTrainingTool;
+        [SerializeField] private AudioClip win;
+        [SerializeField] private AudioClip lose;
 
         // Properties
 
@@ -24,5 +26,8 @@ namespace IdleClicker.Audio
         public AudioClip CloseTab => closeTab;
         public AudioClip SelectTrainingTool => selectTrainingTool;
         public AudioClip EquipTrainingTool => equipTrainingTool;
+        public AudioClip Win => win;
+        public AudioClip Lose => lose;
+
     }
 }

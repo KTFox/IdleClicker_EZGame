@@ -55,5 +55,15 @@ namespace IdleClicker
         {
             AudioSource.PlayClipAtPoint(audioClipRefs.EquipTrainingTool, Vector2.zero, VOLUME);
         }
+
+        public void PlayWinSound()
+        {
+            AudioSource.PlayClipAtPoint(audioClipRefs.Win, Vector2.zero, VOLUME);
+        }
+
+        public void PlayLoseSound()
+        {
+            AudioSource.PlayClipAtPoint(audioClipRefs.Lose, Vector2.zero, VOLUME);
+        }
     }
 }

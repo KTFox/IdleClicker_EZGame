@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: AudioClipRefs
   m_EditorClassIdentifier: 
   exchangeMoney: {fileID: 8300000, guid: 6c931ce01688d574a99c574f40962975, type: 3}
-  training: {fileID: 8300000, guid: 47cffb789bf07af4e8b2d55a9b30eb95, type: 3}
+  training: {fileID: 8300000, guid: ac9d0fc6422106545a57cb0be3684b8a, type: 3}
   upgrade: {fileID: 8300000, guid: 5949a75a010f8054691719aab4574026, type: 3}
   openTab: {fileID: 8300000, guid: 6913d7ad1afd3584eaf33d94c1896418, type: 3}
   closeTab: {fileID: 8300000, guid: 6dfdabcb6166d9649b954dfcb5a3d459, type: 3}
   selectTrainingTool: {fileID: 8300000, guid: d6e7543b0e67a36439e5d97562c830eb, type: 3}
   equipTrainingTool: {fileID: 8300000, guid: f7fdaeb1af9dab0418f9a42f593f9edb, type: 3}
+  win: {fileID: 8300000, guid: 06a954e3fb3d3c6459ae8afd3ae02ccc, type: 3}
+  lose: {fileID: 8300000, guid: 70202ff04198a5e4e9d641fc1e09d65b, type: 3}

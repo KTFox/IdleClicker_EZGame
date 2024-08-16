@@ -28,6 +28,9 @@ namespace IdleClicker.Battle
         [SerializeField] private GameObject prepareTitlePanel;
         [SerializeField] private ResultPanel resultPanel;
 
+        private SoundManager soundManager;
+        private MusicManager musicManager;
+
         private bool canPlayerLift = true;
         private bool canOpponentLift = true;
 
@@ -74,6 +77,8 @@ namespace IdleClicker.Battle
             opponentToolSprite.sprite = persistenceData.Fighter.TrainingTool.ToolVisual;
 
             currentTime = MATCH_TIME;
+            soundManager = FindObjectOfType<SoundManager>();
+            musicManager = FindObjectOfType<MusicManager>();
         }
 
         private void Update()
@@ -105,6 +110,8 @@ namespace IdleClicker.Battle
 
                     if (currentTime <= 0f)
                     {
+                        musicManager.ToggleMusic();
+
                         if (playerCurrentStrength >= opponentCurrentStrength)
                         {
                             persistenceData.Money += persistenceData.Fighter.Reward;
@@ -120,10 +127,12 @@ namespace IdleClicker.Battle
                                 }
                             }
 
+                            soundManager.PlayWinSound();
                             resultPanel.TurnOnResultPanel(true, persistenceData.Fighter.Reward);
                         }
                         else
                         {
+                            soundManager.PlayLoseSound();
                             resultPanel.TurnOnResultPanel(false);
                         }
 
@@ -154,6 +163,7 @@ namespace IdleClicker.Battle
                     if (canPlayerLift)
                     {
                         canPlayerLift = false;
+                        soundManager.PlayTrainingSound();
                         playerAnimationTrigger.AnimationTrigger((int)playerEarningPerLift);
                     }
                 }
