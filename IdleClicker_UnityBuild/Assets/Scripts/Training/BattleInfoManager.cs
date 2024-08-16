@@ -12,6 +12,8 @@ namespace IdleClicker
 
         private OpponentConfig[] opponentConfigs;
 
+        private OpponentSO fighter;
+
         // Properties
 
         public List<OpponentSO> Opponenets => opponenets;
@@ -61,6 +63,8 @@ namespace IdleClicker
 
                     opponentConfigs[i] = config;
                 }
+
+                Debug.Log("BattleInfoManager: instantiate OpponentConfigs");
             }
             else
             {
@@ -78,6 +82,7 @@ namespace IdleClicker
             }
 
             persistenceData.OpponentConfigs = opponentConfigs;
+            persistenceData.Fighter = fighter;
         }
 
         public void UnlockOpponent(OpponentSO opponent)
@@ -90,6 +95,11 @@ namespace IdleClicker
                     OnOpponentConfigUpdate?.Invoke();
                 }
             }
+        }
+
+        public void SetFighter(OpponentSO fighter)
+        {
+            this.fighter = fighter;
         }
     }
 }

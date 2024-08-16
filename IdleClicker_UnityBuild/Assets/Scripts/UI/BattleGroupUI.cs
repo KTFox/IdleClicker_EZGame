@@ -9,8 +9,6 @@ namespace IdleClicker.UI
         [SerializeField] private BattleSlotUI battleSlotPrefab;
         [SerializeField] private GameObject battleGroupContent;
 
-        private BattleInfoManager battleInfoManager;
-
         // Properties
         // Methods
 
@@ -21,8 +19,6 @@ namespace IdleClicker.UI
 
         private void Start()
         {
-            battleInfoManager = FindObjectOfType<BattleInfoManager>();
-
             BattleInfoManager_OnOpponentConfigUpdate();
         }
 
@@ -33,6 +29,7 @@ namespace IdleClicker.UI
                 Destroy(child.gameObject);
             }
 
+            BattleInfoManager battleInfoManager = FindObjectOfType<BattleInfoManager>();
             foreach (BattleInfoManager.OpponentConfig config in battleInfoManager.OpponentConfigs)
             {
                 BattleSlotUI slot = Instantiate(battleSlotPrefab, battleGroupContent.transform);

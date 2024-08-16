@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6483ef268e5c6f248a7ed6e2d5ea1c29, type: 3}
   m_Name: PersistenceData
   m_EditorClassIdentifier: 
-  Strength: 100
-  Money: 160
+  Strength: 2360
+  Money: 1020
   TrainingToolConfigs:
   - TrainingTool: {fileID: 11400000, guid: ea04f000e92a08c42a3b554a2b1a649b, type: 2}
     HasBought: 1
@@ -22,16 +22,21 @@ MonoBehaviour:
   - TrainingTool: {fileID: 11400000, guid: 4c04b084be499704e9924ab911f33caf, type: 2}
     HasBought: 1
   - TrainingTool: {fileID: 11400000, guid: 8374cc68a7184e3438ef734a80d42d72, type: 2}
-    HasBought: 0
+    HasBought: 1
   - TrainingTool: {fileID: 11400000, guid: f50a16a5d428420488de187dbd1fa8b0, type: 2}
     HasBought: 0
   - TrainingTool: {fileID: 11400000, guid: 774f161ce80f4be45a7ea84bc6d79176, type: 2}
     HasBought: 0
   - TrainingTool: {fileID: 11400000, guid: fc23494b09e24ad40aac7058f7cc0009, type: 2}
     HasBought: 0
-  CurrentTrainingTool: {fileID: 11400000, guid: 4c04b084be499704e9924ab911f33caf, type: 2}
-  LiftSpeed: 1
-  LiftSpeedUpgradeCost: 10
-  EarningBonus: 1
-  EarningBonusUpgradeCost: 10
-  OpponentSO: {fileID: 0}
+  CurrentTrainingTool: {fileID: 11400000, guid: 8374cc68a7184e3438ef734a80d42d72, type: 2}
+  LiftSpeed: 1.3000001
+  LiftSpeedUpgradeCost: 80
+  EarningBonus: 1.6000001
+  EarningBonusUpgradeCost: 80
+  OpponentConfigs:
+  - Opponent: {fileID: 11400000, guid: e75c393bfc389444f9620cf93637edee, type: 2}
+    IsUnlocked: 1
+  - Opponent: {fileID: 11400000, guid: d88c4a7e2fa58184280f8835116a497a, type: 2}
+    IsUnlocked: 0
+  Fighter: {fileID: 0}

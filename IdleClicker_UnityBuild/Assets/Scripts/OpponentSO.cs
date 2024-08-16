@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace IdleClicker
 {
-    [CreateAssetMenu(menuName = "OpponentSO")]
+    [CreateAssetMenu(menuName = "Fighter")]
     public class OpponentSO : ScriptableObject
     {
         // Variables
@@ -13,7 +13,7 @@ namespace IdleClicker
         [SerializeField] private float reward;
         [SerializeField] private TrainingToolSO trainingTool;
         [SerializeField] private AnimatorController animatorController;
-        [SerializeField] private float animatorSpeed;
+        [SerializeField] private float liftSpeed;
 
         // Properties
 
@@ -22,7 +22,7 @@ namespace IdleClicker
         public float Reward => reward;
         public TrainingToolSO TrainingTool => trainingTool;
         public AnimatorController AnimatorController => animatorController;
-        public float AnimatorSpeed => animatorSpeed;
+        public float LiftSpeed => liftSpeed;
 
         // Methods
     }

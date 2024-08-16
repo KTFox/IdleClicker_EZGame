@@ -21,6 +21,6 @@ namespace IdleClicker
         public BattleInfoManager.OpponentConfig[] OpponentConfigs;
 
         [Header("Opponent info")]
-        public OpponentSO OpponentSO;
+        public OpponentSO Fighter;
     }
 }

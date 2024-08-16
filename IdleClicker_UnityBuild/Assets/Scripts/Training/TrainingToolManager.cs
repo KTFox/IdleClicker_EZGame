@@ -1,3 +1,4 @@
+using IdleClicker.UI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -89,10 +90,12 @@ namespace IdleClicker
             if (persistenceData.CurrentTrainingTool == null)
             {
                 BuyTrainingTool(trainingTools[0]);
+                FindObjectOfType<TrainingToolInfoPanel>().Setup(currentTraingTool);
             }
             else
             {
                 EquipTrainingTool(persistenceData.CurrentTrainingTool);
+                FindObjectOfType<TrainingToolInfoPanel>().Setup(currentTraingTool);
                 OnTraingToolManagerUpdate?.Invoke();
             }
 
