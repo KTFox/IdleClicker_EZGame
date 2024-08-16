@@ -15,11 +15,10 @@ namespace IdleClicker.Training
         [SerializeField] private TrainingToolHolderUI trainingToolHolderUI;
 
         private TrainingToolManager trainingToolManager;
+        private SoundManager soundManager;
 
         private bool canLift = true;
         private float autoLiftTimer;
-
-        // Properties
 
 
         // Methods
@@ -27,6 +26,7 @@ namespace IdleClicker.Training
         private void Start()
         {
             trainingToolManager = FindObjectOfType<TrainingToolManager>();
+            soundManager = FindObjectOfType<SoundManager>();
         }
 
         private void Update()
@@ -43,6 +43,7 @@ namespace IdleClicker.Training
                 autoLiftTimer = AUTO_LIFTING_SPEED;
                 trainingToolHolderUI.RunCooldown(trainingToolManager.TrainingAnimationSpeedInRealTime);
                 characterAnimatorController.AnimationTrigger(trainingToolManager.EarningPerLift, trainingToolManager.LiftSpeed);
+                soundManager.PlayTrainingSound();
             }
         }
 
@@ -60,6 +61,7 @@ namespace IdleClicker.Training
                         canLift = false;
                         trainingToolHolderUI.RunCooldown(trainingToolManager.TrainingAnimationSpeedInRealTime);
                         characterAnimatorController.AnimationTrigger(trainingToolManager.EarningPerLift, trainingToolManager.LiftSpeed);
+                        soundManager.PlayTrainingSound();
                     }
                 }
             }

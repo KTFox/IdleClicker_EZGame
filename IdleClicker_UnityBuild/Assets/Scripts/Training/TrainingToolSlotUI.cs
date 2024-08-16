@@ -30,6 +30,7 @@ namespace IdleClicker.Training
             GetComponent<Button>().onClick.AddListener(() =>
             {
                 FindObjectOfType<BagGroupUI>().SetSelectedTool(this.trainingTool);
+                FindObjectOfType<SoundManager>().PlaySelectTrainingToolSound();
             });
 
         }

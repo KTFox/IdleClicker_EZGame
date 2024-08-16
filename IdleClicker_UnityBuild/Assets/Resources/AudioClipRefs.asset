@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ebe763e53580147b8cc620f6acf70c, type: 3}
+  m_Name: AudioClipRefs
+  m_EditorClassIdentifier: 
+  exchangeMoney: {fileID: 8300000, guid: 6c931ce01688d574a99c574f40962975, type: 3}
+  training: {fileID: 8300000, guid: 47cffb789bf07af4e8b2d55a9b30eb95, type: 3}
+  upgrade: {fileID: 8300000, guid: 5949a75a010f8054691719aab4574026, type: 3}
+  openTab: {fileID: 8300000, guid: 6913d7ad1afd3584eaf33d94c1896418, type: 3}
+  closeTab: {fileID: 8300000, guid: 6dfdabcb6166d9649b954dfcb5a3d459, type: 3}
+  selectTrainingTool: {fileID: 8300000, guid: d6e7543b0e67a36439e5d97562c830eb, type: 3}
+  equipTrainingTool: {fileID: 8300000, guid: f7fdaeb1af9dab0418f9a42f593f9edb, type: 3}
