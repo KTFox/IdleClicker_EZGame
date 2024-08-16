@@ -9,6 +9,7 @@ namespace IdleClicker.Training
         [SerializeField] private GameObject upgradeTab;
         [SerializeField] private GameObject bagTab;
         [SerializeField] private GameObject battleTab;
+        [SerializeField] private GameObject settingTab;
 
 
         // Methods
@@ -18,6 +19,7 @@ namespace IdleClicker.Training
             upgradeTab.SetActive(false);
             bagTab.SetActive(false);
             battleTab.SetActive(false);
+            settingTab.SetActive(false);
         }
 
         public void ToggleUpgradeTab()
@@ -33,6 +35,11 @@ namespace IdleClicker.Training
         public void ToggleBattleTab()
         {
             battleTab.SetActive(!battleTab.activeSelf);
+        }
+
+        public void ToggleSettingTab()
+        {
+            settingTab.SetActive(!settingTab.activeSelf);
         }
     }
 }
